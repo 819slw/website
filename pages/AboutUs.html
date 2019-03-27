@@ -1,0 +1,395 @@
+<template>
+<div id="login_home" class="login-home">
+  <div class="bdp-personal" id="init_scroll" style="position:relative">
+<nav class="navbar clearfix J-nav aboutUs-bk">
+    <div class="container">
+        <div class="navbar-header">
+            <i class="ico-list navbar-toggle collapsed cursor"></i>
+            <a class="navbar-logo" href="">
+            </a>
+        </div>
+        <div class="navbar-collapse nav-hide" id="J-navbar-collapse">
+            <!-- <i class="ico-close navbar-toggle close-toggle"></i> -->
+            <i class="material-icons icon navbar-toggle close-toggle cursor">close</i>
+            <ul class="navbar-nav nav-list navbar-left">
+                <router-link to="/">
+                    <li class="nav-list-item" id="home_page"><a>首页</a></li>
+                </router-link>
+                <router-link to="/CaseOperate">
+                    <li class="nav-list-item" id="case_page"><a>课程&会员</a></li>
+                </router-link>
+                 <!-- 因为bdp做的是当游览器宽度小于992的时候 隐藏用户案例 和教学视频所以这里删除id名称 member_info  instructional_video -->
+                 <!-- 并将767宽度兼容 改为840 -->
+                <router-link to="/Member">
+                    <li class="nav-list-item" id=""><a>用户案例</a></li>
+                </router-link>
+                <router-link to="/InstructionalVideo">
+                    <li class="nav-list-item" id=""><a>教学视频</a></li>
+                </router-link>
+                <router-link to="/Portal">
+                    <li class="nav-list-item" id="about_page"><a>用户社区</a></li>
+                </router-link>
+                <!-- <router-link to="/AboutUs">
+                    <li class="nav-list-item active" id=""><a>公司简介</a></li>
+                </router-link> -->
+            </ul>
+            <ul class="navbar-nav nav-button-group navbar-right">
+                <li class="nav-list-item">
+                    <button class="download-btn btn-animation follow-Public-number"><span>免费领取资料</span></button>
+                </li>
+                <li class="nav-list-item">
+                    <button class="download-btn btn-animation follow-Small-program"><span>PTE交流群</span></button>
+                </li>
+                <li class="nav-list-item J-register-btn">
+                    <a>
+                        <button class="signin-btn btn-animation btn-an-adverse" @click="loginWebSite()"><span>注册</span></button>
+                    </a>
+                </li>
+                <li class="nav-list-item J-login-btn">
+                    <a>
+                        <button class="signin-btn btn-animation btn-an-adverse " @click="loginWebSite()"><span>登录</span></button>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+
+<!-- 扫描二维码 -->
+<div class="erweima-download-modal-wrapper erweima-J-down-load-app" style="display: none;">
+    <div class="erweima-download-modal-bg"></div>
+    <div class="erweima-download-modal">
+        <div class="download-modal-header">
+            <div class="erweima-modal-close"></div>
+        </div>
+        <div class="download-modal-body">
+            <div class="download-title">扫描二维码 下载APP</div>
+            <div class="download-sub-title"></div>
+            <img class="download-code" src="/static/images/login_page/offical_weichat_1a0871c.jpg">
+        </div>
+    </div>
+</div>
+
+   <!-- //登陆弹出框 -->
+<div class="login-download-modal-wrapper login-J-down-load-app" id="login_box">
+    <div class="login-download-modal-bg" @click="closeRequest()"></div>
+    <div class="login-download-modal login-grid">
+      <img class="grid-top-pic" src="/static/images/login_page/loginBoxTop.png" style="max-width: 100%">
+      <div class="top-word">
+        <p class="brand-intro-font">PTE黑科技在线学习平台</p>
+        <p class="brand-edition-font">Ver 1.15.0版本</p>
+      </div>
+      <div class="login-content">
+        <img class="erweima" src="/static/images/login_page/load.gif" />
+        <div style="font-size:14px;color:red;max-width:60%" v-if="isShowLoginState">{{ loginState }}</div>
+        <p class="login-font-style">请使用微信扫描二维码登录</p>
+        <p class="login-font-style">“PTE黑科技”</p>
+        <button class="solve" v-if="isShowSolveBtn" @click="solveExtent">已解决？点击刷新</button>
+      </div>
+    </div>
+</div>
+
+<div id="aboutUs_page">
+  <div class="aboutUs-title-top">
+    <p class="aboutUs-intro">公司简介</p>
+    <p class="aboutUs-title">大班长带你走进PTE</p>
+  </div>
+  <div class="aboutUs-theme">
+    <img src="/static/images/login_page/About-theme-one.jpg" />
+    <div class="aboutUs-theme-conetnt">
+      <p class="aboutUs-theme-conetnt-title">ABOUT US</p>
+      <p class="aboutUs-theme-conetnt-subtitle">创造PTE学习新生态</p>
+      <p class="aboutUs-theme-conetnt-article">深圳市科科智能科技有限公司是PTE业内首屈一指的PTE研学专家，旗下拥有线上产品PTE黑科技学习平台（pte.ai），结合线上线下的业务链条，汇集多位资深导师，依托教学经验及课程优势，用科学严谨的题库质量管理，丰富多维的训练指导方法，致力于成为全球考生备考的加油站。</p>
+    </div>
+  </div>
+  <div class="aboutUs-theme">
+    <div class="aboutUs-theme-conetnt">
+      <p class="aboutUs-theme-conetnt-title">课程设置</p>
+      <p class="aboutUs-theme-conetnt-subtitle">在线练习，官方模考，伙伴督学， 精品小课堂</p>
+      <p class="aboutUs-theme-conetnt-article">考生可以在我们对应的小程序和网站进行权威标准的练习，并与其它考生一同讨论题目内容，同时体验记录收藏夹、生词本等丰富的订制应用，阶段性学习后，考生可以选择进行与官方一致的模拟考试，降低临场敏感阈值，在此基础上，黑科技提供高质量的在线课程，方便考生随时解决备考过程中的各类问题。</p>
+    </div>
+    <img src="/static/images/login_page/About-theme-two.jpg" />
+  </div>
+</div>
+
+
+
+
+
+<footer>
+    <div class="container">
+        <!-- <div class="row">
+            <img src="/static//static/images/login_page/new_home/footer_logo.png" class="logo footer-logo">
+        </div> -->
+        <div class="row">
+            <div class="col-md-8">
+                <ul class="footer-nav-container">
+                    <router-link to="/">
+                        <li><a class="container-intro">首页</a><i class="disc"></i></li>
+                    </router-link>
+                    <router-link to="/CaseOperate">
+                        <li><a class="container-intro">课程&会员</a><i class="disc"></i></li>
+                    </router-link>
+                    <router-link to="/Member">
+                        <li><a class="container-intro">用户案例</a><i class="disc"></i></li>
+                    </router-link>
+                    <router-link to="/InstructionalVideo">
+                        <li><a class="container-intro">教学视频</a><i class="disc"></i></li>
+                    </router-link>
+                    <router-link to="/Portal">
+                        <li><a class="container-intro">用户社区</a><i class="disc"></i></li>
+                    </router-link>
+                    <router-link to="/AboutUs">
+                        <li class="container-intro">公司简介<i class="disc"></i></li>
+                    </router-link>
+                    <li id="showPCall">联系我们</li>
+                </ul>
+                <ul class="contact-container footer-mesg">
+                    <li><i class="ico ico-address"></i>深圳市南山区南山街道南海大道西桂庙路北阳光华艺大厦1栋4F、4G-20</li>
+                    <li><a href="https://www.zhihu.com/org/ptehei-ke-ji/posts"><i class="ico ico-zhihu"></i>黑科技PTE</a></li>
+                    <li><i class="ico ico-phone"></i>400-101-9155</li>
+                    <li><a id="email_contact" href="mailto:info@ikk.ai"><i class="ico ico-email"></i>info@ikk.ai</a></li>
+                    <!-- <li><i class="ico ico-qq"></i>2543360559</li> -->
+                </ul>
+                <p class="copyright">Copyright 2017 - 2018 粤ICP备18023850号 ikk. All Rights Reserved.<span>深圳市科科智能科技有限公司 版权所有</span></p>
+            </div>
+            <div class="col-md-2 footer-code">
+                <p class="code-name">PTE微信公众号</p>
+                <img src="/static/images/login_page/unified-baidu-statistics.jpg" width="100px">
+                <p class="code-info">更多PTE热门资讯</p>
+            </div>
+            <div class="col-md-2 footer-code">
+                <p class="code-name">PTE小程序</p>
+                <img src="/static/images/login_page/offical_weichat_1a0871c.jpg" width="100px">
+                <p class="code-info">扫TA随时开始学习</p>
+            </div>
+            <div class="col-md-2 footer-code">
+                <p class="code-name">客服二维码</p>
+                <img src="/static/images/login_page/unified-baidu-statistics.jpg" width="100px">
+                <p class="code-info">咨询更多问题</p>
+            </div>
+        </div>
+    </div>
+</footer>
+  </div>
+  </div>
+</template>
+<script>
+var isShowLoginBox = false;
+import AV from 'leancloud-storage'
+  import {
+    LoginVerify
+  } from '@/api/user'
+import '../../assets/js/public.js'
+
+  /* eslint-disable */
+  export default {
+    data () {
+      return {
+          turnImg:'',
+          isShowLoginState:false,
+          loginState:'',
+          isShowSolveBtn:false,
+          turnContainer:[
+            {
+                title:'PTE黑科技 线上课程面向全球招生',
+                content:'帮你测试英语水平+量身定制课程',
+                img:'/static/images/login_page/banner3_fe48ff4.png',
+                banner:'banner-3'
+            },
+            {
+                title:'PTE考试适用于哪些人群',
+                content:'出国留学+想要移民+打工度假签证+大企业员工评核',
+                img:'/static/images/login_page/banner4-mobile_da38e1a.png',
+                banner:'banner-4'
+            },
+            {
+                title:'PTE黑科技 超12W+用户移民留学备考选择',
+                content:'智能纠音 | 智能打分 | 智能成绩单分析',
+                img:'/static/images/login_page/banner1_56d9c8b.png',
+                banner:'banner-1'
+            },
+                {
+                title:'年底大放送，PTE大陆地区折扣报名券',
+                content:'购买报名券，即送课程优惠券，满4999送200，满7999送400 </br>截至时间2019年2月2日',
+                img:'/static/images/login_page/banner2_c078255.png',
+                banner:'banner-2'
+            },
+            {
+                title:'2019年PTE黑科技寒假封闭班开始招生啦',
+                content:'坐标仅限广州 郑州地区，线下冲刺班，分手PTE',
+                img:'/static/images/login_page/banner5_23d49de.png',
+                banner:'banner-5'
+            },
+            ],
+      }
+    },
+    mounted(){
+        this.$nextTick(function(){
+            // document.body.scrollTop = 0
+        })
+    },
+    methods:{
+        closeRequest(){
+            isShowLoginBox = false;
+            $('#login_box.login-J-down-load-app').hide();
+        },
+        loginWebSite(){
+            let that = this;
+            this.isShowSolveBtn = false;
+            this.isShowLoginState = false;
+            isShowLoginBox = true;
+            $('#login_box.login-J-down-load-app').show();
+            AV.User.logOut();
+            this.$store.dispatch('logOut')
+            //加载数据
+            $.ajax({
+                type:'GET',
+                url:"https://stg-pteppp.leanapp.cn/weblogin/getqr/",
+                data:{},
+                async:true,
+                success:function(res){
+                    $('.login-download-modal-wrapper .login-content .erweima').attr('src',res.qr);
+                    that.obtainLoginState(res.session);
+                },
+                error:function(error){
+                    console.log(error);
+                }
+            })
+        },
+        obtainLoginState(id){
+            var timer = null;
+            clearTimeout(timer);
+            let that = this;
+            $.ajax({
+                type:"Get",
+                url:"https://stg-pteppp.leanapp.cn/weblogin/update/"+id+"",
+                data:{},
+                async:true,
+                success:function(res){
+                    let state = res.state;
+                    console.log(state);
+                    if(state ==='normal'){
+                        if(isShowLoginBox){
+                            timer = setTimeout(() => {
+                            that.obtainLoginState(id);
+                            },1000);
+                        }
+                    }else if(state ==='scan'){
+                        if(isShowLoginBox){
+                            timer = setTimeout(() => {
+                            that.obtainLoginState(id);
+                            },1000);
+                        }
+                        $('.login-download-modal-wrapper .login-content .erweima').attr('src','/static/images/login_page/load.gif');
+                        that.loginState = '已扫码';
+                        that.isShowLoginState = true;
+                    }else if(state == 'auth'){
+                        that.loginState = '正在登录';
+                        that.userLogin(res)
+                    }else if(state == 'invalid'){
+                        that.loginState = '已失效';
+                        that.isShowLoginState = true;
+                    }
+                },
+                error:function(){
+                    that.loginState = '登录失败，请重试';
+                    that.isShowLoginState = true;
+                }
+            })
+        },
+        solveExtent(){
+            this.loginWebSite();
+        },
+        async LoginVerifyData () {
+            try {
+                return await LoginVerify()
+            } catch (err) {
+                // this.WarnError(err);
+                return Promise.reject(err)
+            }
+        },
+        userLogin(res){
+            let that = this;
+            try {
+                let auth = res.auth
+                AV.User.loginWithAuthData(res.auth, 'lc_weapp', {
+                    failOnNotExist: true
+                }).then(user => {
+                    window.userJSON = JSON.parse(JSON.stringify(user))
+                    // commit to vuex
+                    this.$store.dispatch('user_login', window.userJSON)
+                    return this.LoginVerifyData()
+                })
+                .then(() =>{
+                    this.$router.push({ path: '/index' })
+                })
+                .catch(err => {
+                    this.WarnError(err);
+                })
+            } catch (error) {
+                this.WarnError(error);
+            }
+        },
+        WarnError(Error){
+            let obj = JSON.parse(JSON.stringify(Error));
+            let str = obj.rawMessage || obj.error;
+            this.loginState = str;
+            this.isShowSolveBtn = true;
+            $('.login-download-modal-wrapper .login-content .erweima').attr('src','/static/images/login_page/unified-baidu-statistics.jpg');
+        }
+    }
+  }
+</script>
+
+<style lang="less">
+  @import "../../less/Landing/auto_combine_27876_2f360d4.css";
+  @import "../../less/Landing/common.less";
+  @import "../../less/Landing/aboutus.less";
+  .login-home{
+    .aboutUs-bk{
+      background:#069af4;
+    }
+      .solve{
+         padding: 0 20px;
+         height:40px;
+         margin-top:10px;
+         border-radius:4px;
+         color:#fff;
+         font-size:16px;
+         box-shadow:0 0 5px #00b3fe;
+         background:#1bd1fc;
+         letter-spacing:1px;
+         &:hover{
+            box-shadow:0 0 10px #00b3fe;
+         }
+      }
+    .container-intro{
+        color: #fff !important;
+    }
+    .v-carousel{
+        height:100%;
+    }
+    .v-carousel__controls{
+        background:none;
+        bottom:100px;
+    }
+    .v-btn--icon{
+        width:5px;
+        height:5px;
+    }
+    .icon{
+        font-size:15px;
+    }
+    .v-carousel__controls__item--active i{
+        font-size:15px !important;
+    }
+    .banner-slogan{
+        font-size:16px !important;
+        letter-spacing:1px !important;
+    }
+  }
+
+</style>

@@ -1,0 +1,141 @@
+.search-university-table td{
+  text-align: center;
+}
+.carousel-indicators{
+  bottom: 110px !important;
+}
+.wechatshow{
+  width:100vw;
+  height:100vh;
+  position:relative;
+  z-index:99999;
+  background:#8925f4;
+}
+.wechatback{
+  width:100vw;
+  height:100vh;
+  position:absolute;
+}
+.wechattop{
+  border-radius:5px;
+  box-shadow:0px 15px 40px 5px #777070;
+  width:400px;
+  max-width:100%;
+  height:400px;
+  background:#f7eeee;
+  padding:0 20px;
+  position:absolute;
+  z-index:100;
+  left:0;
+  right:0;
+  top:0;
+  bottom:0;
+  margin:auto;
+}
+.logotop{
+  display:block;
+  width:100px;
+  height:185px;
+  margin:0 auto;
+  padding-top:30px;
+}
+span{
+  display:block;
+  margin:0 auto;
+  text-align:center;
+}
+.mask{
+  position:fixed;
+  width:100vw;
+  height:100vh;
+  background:#000;
+  opacity:0.5;
+}
+.report-card-box P:nth-child(1){
+  font-size:28px;
+}
+.report-card-box{
+  width:41%;
+  min-width:307px;
+  height:100%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+
+
+}
+.report-card-box div:nth-child(2){
+  width:100%;
+  height:1px;
+  background:#fff;
+  position:relative;
+  margin-top:50px;
+}
+.report-card-box div:nth-child(2) p:nth-child(1){
+  left:0;
+  right:0;
+  margin:0 auto;
+  position:absolute;
+  font-size:16px;
+  height:35px;
+  line-height:35px;
+  text-align:center;
+  bottom:-17.5px;
+}
+.report-card-box div:nth-child(2) p:nth-child(1) span{
+  border:1px solid #fff;
+  padding:0 20px;
+  border-radius:35px;
+  background:RGB(90,68,229);
+}
+.clever-report-card{
+  width: 100%;
+  height: 322px;
+  background: url('../images/clever-report-card-bk.jpg') no-repeat;
+  background-size: 100% 100%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  color:#fff;
+  margin-top:80px;
+
+}
+.login-home .solve{
+  padding: 0 20px;
+  height:40px;
+  margin-top:10px;
+  border-radius:4px;
+  color:#fff;
+  font-size:16px;
+  box-shadow:0 0 5px #00b3fe;
+  background:#1bd1fc;
+  letter-spacing:1px;
+}
+.login-home .solve :hover{
+  box-shadow:0 0 10px #00b3fe;
+}
+.container-intro{
+  color: #fff !important;
+}
+.v-carousel{
+  height:100% !important;
+}
+.v-responsive{
+  height: 100% !important;
+}
+.v-carousel__controls{
+  background:none;
+  bottom:100px;
+}
+.icon{
+  font-size:15px;
+}
+.v-carousel__controls__item--active i{
+  font-size:15px !important;
+}
+.banner-slogan{
+  font-size:16px !important;
+  letter-spacing:1px !important;
+}

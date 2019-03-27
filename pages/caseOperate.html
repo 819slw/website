@@ -1,0 +1,1208 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../static/css/auto_combine_73112_320ecc7.css">
+    <link rel="stylesheet" href="../static/css/auto_combine_e9548_3e22ea4.css">
+    <link rel="stylesheet" href="../static/css/common.css">
+    <link rel="stylesheet" href="../static/css/caseoperateStyle.css">
+</head>
+<body>
+    <div id="login_home">
+        <div class="case-body" style="position:relative">
+            <div class="warn-box">
+                <div class="warn-word">敬请期待！</div>
+            </div>
+            <div class="Discount-warn-box" id="examDiscount">
+                <div class="warn-word">店铺没货 暂时关闭了</div>
+            </div>
+<nav class="navbar clearfix J-nav">
+    <div class="container">
+        <div class="navbar-header">
+            <i class="ico-list navbar-toggle collapsed cursor"></i>
+            <a class="navbar-logo" href="">
+            </a>
+        </div>
+        <div class="navbar-collapse nav-hide" id="J-navbar-collapse">
+            <!-- <i class="ico-close navbar-toggle close-toggle"></i> -->
+            <i class="material-icons icon navbar-toggle close-toggle cursor">close</i>
+            <ul class="navbar-nav nav-list navbar-left">
+                <a href="../index.html">
+                    <li class="nav-list-item active" id="home_page">首页</li>
+                </a>
+                <a href="#">
+                    <li class="nav-list-item" id="case_page">课程&会员</li>
+                </a>
+                <!-- 因为bdp做的是当游览器宽度小于992的时候 隐藏用户案例 和教学视频所以这里删除id名称 member_info  instructional_video -->
+                <!-- 并将767宽度兼容 改为840 -->
+                <a href="./Member.html">
+                    <li class="nav-list-item" id="">用户案例</li>
+                </a>
+            </ul>
+            <ul class="navbar-nav nav-button-group navbar-right">
+                <li class="nav-list-item">
+                    <button class="download-btn btn-animation follow-Public-number"><span>免费领取资料</span></button>
+                </li>
+                <!-- icp临时取消 -->
+                <!-- <li class="nav-list-item">
+                    <button class="download-btn btn-animation follow-Small-program"><span>PTE交流群</span></button>
+                </li> -->
+                <li class="nav-list-item J-register-btn">
+                    <a>
+                        <button class="signin-btn btn-animation btn-an-adverse" @click="loginWebSite()"><span>注册</span></button>
+                    </a>
+                </li>
+                <li class="nav-list-item J-login-btn">
+                    <a>
+                        <button class="signin-btn btn-animation btn-an-adverse " @click="loginWebSite()"><span>登录</span></button>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+            <!-- 扫描二维码 -->
+            <div class="erweima-download-modal-wrapper erweima-J-down-load-app" style="display: none;">
+                <div class="erweima-download-modal-bg"></div>
+                <div class="erweima-download-modal">
+                    <div class="download-modal-header">
+                        <div class="erweima-modal-close"></div>
+                    </div>
+                    <div class="download-modal-body">
+                        <div class="download-title">扫描二维码 下载APP</div>
+                        <div class="download-sub-title"></div>
+                        <img class="download-code" src="../static/images/offical_weichat_1a0871c.jpg">
+                    </div>
+                </div>
+            </div>
+
+            <!-- //登陆弹出框 -->
+            <div class="login-download-modal-wrapper login-J-down-load-app" id="login_box">
+                <div class="login-download-modal-bg" @click="closeRequest()"></div>
+                <div class="login-download-modal login-grid">
+                <img class="grid-top-pic" src="../static/images/loginBoxTop.png" style="max-width: 100%">
+                <div class="top-word">
+                    <p class="brand-intro-font">PTE黑科技在线学习平台</p>
+                    <p class="brand-edition-font">Ver 1.15.0版本</p>
+                </div>
+                <div class="login-content">
+                    <img class="erweima" src="../static/images/load.gif" />
+                    <div style="font-size:14px;max-width:60%" v-if="isShowLoginState">{{ loginState }}</div>
+                    <p class="login-font-style">请使用微信扫描二维码登录</p>
+                    <p class="login-font-style">“PTE黑科技”</p>
+                    <button class="solve" v-if="isShowSolveBtn" @click="solveExtent">已解决？点击刷新</button>
+                </div>
+                </div>
+            </div>
+                <section class="banner member-banner J-scorll-top">
+                    <h5 class="banner-title">关注PTE，更关注学习的你</h5>
+                    <p class="banner-slogan">考生的成长是我们的唯一目标，在学习PTE的所有场景之中，我们都会提供不同的帮助，助力考生提高学习效率，授人以鱼不如授人以渔！</p>
+                </section>
+                <section class="case-wrap container">
+                    <div class="case-pannel">
+                        <div class="pannel-header">
+
+                            <ul class="case-list clearfix" v-if="!isShowTemporary">
+                                <li :class="{active:isShowCourseOrMember}" class="case-item" data-target="J-new-media" @click="changeShowCourse">
+                                    <i class="ico-case ico-media-operate"></i>
+                                    <span>课程优选</span>
+                                </li>
+                                <li :class="{active:!isShowCourseOrMember}" class="case-item" data-target="J-extension" @click="changeShowMember">
+                                    <i class="ico-case ico-internet-extension"></i>
+                                    <span>会员特权</span>
+                                </li>
+                                <li class="case-item unopen">
+                                    <i class="ico-case ico-web-operate"></i>
+                                    <div class="tips-wrap">
+                                    <span class="tip">拓展&服务</span>
+                                    <span class="unopen-tip">敬请期待</span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="pannel-body" v-if="!isShowTemporary">
+                            <ul class="video-list clearfix J-video-list">
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="J-extension" v-if="!isShowCourseOrMember">
+                    <section class="member-pannel">
+                        <div class="member-content container J-scorll-top">
+                            <ul class="member-introduction-list clearfix">
+                                <li class="member-introduction-item show member-gold">
+                                    <dl>
+                                        <dt class="member-intr-header">
+                                            <div class="member-intr-title-wrap">
+                                                <div class="member-intr-title">VIP会员</div>
+                                                <div class="member-intro-target">
+                                                    <!-- 尚未开放 -->
+                                                </div>
+                                                <div class="member-intr-price text-right">
+                                                    <span class="member-intr-price-symbol">¥</span><span class="member-intr-price-txt">99</span>/月
+                                                    <div class="member-intr-price-origin">¥199</div>
+                                                    <div class="open-item-discount">限时折扣</div>
+                                                </div>
+                                            </div>
+                                            <p style="padding:5px 20px;font-size:13px;">一键导出pdf </p>
+                                            <p style="padding:5px 20px">智能口语纠音</p>
+                                            <p style="padding:5px 20px">网页版智能练习平台</p>
+                                            <p style="padding:5px 20px">全题型打分练习</p>
+                                            <div class="member-upgrade-btn-wrap"><!--  ng-if="memberData.vipLevel <= 1 && memberData.vipLevel != -1" -->
+                                                <!-- <a target="_black" href="https://item.taobao.com/item.htm?spm=a1z38n.10677092.0.0.67751debd7LoXA&id=580577957281" class="member-upgrade-btn">立即加入</a> -->
+                                                <!-- icp临时代码 -->
+                                                <a target="_black" @click='detailedClassSeventeen()' class="member-upgrade-btn">点击查看</a>
+                                            </div>
+                                        </dt>
+                                </dl>
+                                </li>
+                                <li class="member-introduction-item show member-gold">
+                                    <dl>
+                                        <dt class="member-intr-header">
+                                            <div class="member-intr-title-wrap">
+                                                <div class="member-intr-title">VIP会员</div>
+                                                <div class="member-intro-target">
+                                                    <!-- 尚未开放 -->
+                                                </div>
+                                                <div class="member-intr-price text-right">
+                                                    <span class="member-intr-price-symbol">¥</span><span class="member-intr-price-txt">199</span>/3月
+                                                    <div class="member-intr-price-origin">¥299</div>
+                                                    <div class="open-item-discount">限时折扣</div>
+                                                </div>
+                                            </div>
+                                            <p style="padding:5px 20px;font-size:13px;">一键导出pdf </p>
+                                            <p style="padding:5px 20px">智能口语纠音</p>
+                                            <p style="padding:5px 20px">网页版智能练习平台</p>
+                                            <p style="padding:5px 20px">全题型打分练习</p>
+                                            <div class="member-upgrade-btn-wrap"><!--  ng-if="memberData.vipLevel <= 2 && memberData.vipLevel != -1" -->
+                                                <!-- <a target="_black" href="https://item.taobao.com/item.htm?spm=a1z38n.10677092.0.0.67751debd7LoXA&id=580577957281" class="member-upgrade-btn">立即加入</a> -->
+                                                <!-- icp临时代码 -->
+                                                <a target="_black" @click='detailedClassEighteen()' class="member-upgrade-btn">点击查看</a>
+                                            </div>
+                                        </dt>
+                                </dl>
+                                </li>
+                                <li class="member-introduction-item show member-company">
+                                    <dl>
+                                        <dt class="member-intr-header">
+                                            <div class="member-intr-title-wrap">
+                                                <div class="member-intr-title">VIP会员</div>
+                                                <div class="member-intro-target">
+                                                    <!-- 尚未开放 -->
+                                                </div>
+                                                <div class="member-intr-price text-right">
+                                                    <span class="member-intr-price-symbol">¥</span><span class="member-intr-price-txt">349</span>/6月
+                                                    <div class="member-intr-price-origin">¥499</div>
+                                                    <div class="open-item-discount">限时折扣</div>
+                                                </div>
+                                            </div>
+                                            <p style="padding:5px 20px;font-size:13px;">一键导出pdf </p>
+                                            <p style="padding:5px 20px">智能口语纠音</p>
+                                            <p style="padding:5px 20px">网页版智能练习平台</p>
+                                            <p style="padding:5px 20px">全题型打分练习</p>
+                                            <div class="member-upgrade-btn-wrap">
+                                                <!-- <a target="_black" href="https://item.taobao.com/item.htm?spm=a1z38n.10677092.0.0.67751debd7LoXA&id=580577957281" class="member-upgrade-btn">立即加入</a> -->
+                                                <!-- icp临时代码 -->
+                                                <a target="_black" @click='detailedClassNineteen()' class="member-upgrade-btn">点击查看</a>
+                                            </div>
+                                        </dt>
+                                </dl>
+                                </li>
+                            </ul>
+                            <div style="clear: both;"></div>
+                        </div>
+                            <div style="clear: both;"></div>
+                    </section>
+                </section>
+                <div class="J-new-media" v-if="isShowCourseOrMember">
+                    <!-- add new code    改动：  member-pannel：   margin-top:-118px; -->
+                    <section class="member-pannel" v-if='isShowList'>
+                        <div class="member-content container J-scorll-top">
+                            <ul class="member-introduction-list clearfix">
+                                <li class="member-introduction-item show member-gold">
+                                    <dl>
+                                        <dt class="member-intr-header">
+                                            <div class="member-intr-title-wrap">
+                                                <div class="member-intr-title">考试优惠券</div>
+                                                <div class="member-intro-target">
+
+                                                </div>
+                                                <div class="member-intr-price text-right">
+                                                    <span class="member-intr-price-symbol">¥</span><span class="member-intr-price-txt">1729</span>/次
+                                                    <div class="member-intr-price-origin">¥2999</div>
+                                                    <div class="open-item-discount">限时折扣</div>
+                                                </div>
+                                            </div>
+                                            <p class="member-intro-character">
+                                                赠送四小时是试听课程，免费领机经APP。
+                                            </p>
+                                            <div class="member-upgrade-btn-wrap"><!--  ng-if="memberData.vipLevel <= 1 && memberData.vipLevel != -1" -->
+                                                <!-- <a class="member-upgrade-btn cursor" href="https://item.taobao.com/item.htm?spm=a230r.1.14.20.14eb1b15sojqQ3&id=564485523668&ns=1&abbucket=11#detail" target="_black">立即申请</a> -->
+                                                <!-- ICP备案临时代码 -->
+                                                <a class="member-upgrade-btn cursor"  @click='detailedClassOne()'>点击查看</a>
+                                            </div>
+                                        </dt>
+                                </dl>
+                                </li>
+                                <li class="member-introduction-item show member-gold">
+                                    <dl>
+                                        <dt class="member-intr-header">
+                                            <div class="member-intr-title-wrap">
+                                                <div class="member-intr-title">一对一课程</div>
+                                                <div class="member-intro-target">
+                                                    按课时收费
+                                                </div>
+                                                <div class="member-intr-price text-right">
+                                                    <span class="member-intr-price-symbol">¥</span><span class="member-intr-price-txt">600</span>/hr
+                                                    <div class="member-intr-price-origin">¥699</div>
+                                                    <div class="open-item-discount">限时折扣</div>
+                                                </div>
+                                            </div>
+                                            <p class="member-intro-character">
+                                                适用于短期需要达目标分，各个项目有一定基础，上课时间灵活的同学
+                                            </p>
+                                            <div class="member-upgrade-btn-wrap"><!--  ng-if="memberData.vipLevel <= 1 && memberData.vipLevel != -1" -->
+                                                <!-- <a class="member-upgrade-btn" href="https://item.taobao.com/item.htm?spm=a230r.1.14.16.24ef7453JUPocp&id=564491790077&ns=1&abbucket=3#detail" target="_black">立即申请</a> -->
+                                                <!-- ICP备案临时代码  -->
+                                                <a class="member-upgrade-btn cursor"  @click='detailedClassTwo()'>点击查看</a>
+                                            </div>
+                                        </dt>
+                                </dl>
+                                </li>
+                                <li class="member-introduction-item show member-gold">
+                                    <dl>
+                                        <dt class="member-intr-header">
+                                            <div class="member-intr-title-wrap">
+                                                <div class="member-intr-title">听力突破班</div>
+                                                <div class="member-intro-target">
+                                                    16课时
+                                                </div>
+                                                <div class="member-intr-price text-right">
+                                                    <span class="member-intr-price-symbol">¥</span><span class="member-intr-price-txt">2499</span>/月
+                                                    <div class="member-intr-price-origin">¥2999</div>
+                                                    <div class="open-item-discount">限时折扣</div>
+                                                </div>
+                                            </div>
+                                            <p class="member-intro-character">
+                                                适用于所有考生，尤其适合小白和听力无法突破的同学
+                                            </p>
+                                            <div class="member-upgrade-btn-wrap"><!--  ng-if="memberData.vipLevel <= 2 && memberData.vipLevel != -1" -->
+                                                <!-- <a class="member-upgrade-btn" href="https://item.taobao.com/item.htm?spm=a230r.1.14.54.24ef7453JUPocp&id=564232372147&ns=1&abbucket=3#detail" target="_black">立即申请</a> -->
+                                                <!-- ICP备案临时代码  -->
+                                                <a class="member-upgrade-btn cursor"  @click='detailedClassThree()'>点击查看</a>
+                                            </div>
+                                        </dt>
+                                </dl>
+                                </li>
+                                <li class="member-introduction-item show member-gold">
+                                    <dl>
+                                        <dt class="member-intr-header">
+                                            <div class="member-intr-title-wrap">
+                                                <div class="member-intr-title">押题班</div>
+                                                <div class="member-intro-target">
+                                                    16课时
+                                                </div>
+                                                <div class="member-intr-price text-right">
+                                                    <span class="member-intr-price-symbol">¥</span><span class="member-intr-price-txt">2499</span>/月
+                                                    <div class="member-intr-price-origin">¥2999</div>
+                                                    <div class="open-item-discount">限时折扣</div>
+                                                </div>
+                                            </div>
+                                            <p class="member-intro-character">
+                                                适用于即将考试，有一定基础但没有大量时间复习机经的同学
+                                            </p>
+                                            <div class="member-upgrade-btn-wrap"><!--  ng-if="memberData.vipLevel <= 1 && memberData.vipLevel != -1" -->
+                                                <!-- <a class="member-upgrade-btn" href="https://item.taobao.com/item.htm?spm=a1z38n.10677092.0.0.69051debBortRW&id=576611196733" target="_black">立即申请</a> -->
+                                                <!-- ICP备案临时代码  -->
+                                                <a class="member-upgrade-btn cursor"  @click='detailedClassFour()'>点击查看</a>
+                                            </div>
+                                        </dt>
+                                </dl>
+                                </li>
+                                <li class="member-introduction-item show member-gold">
+                                    <dl>
+                                        <dt class="member-intr-header">
+                                            <div class="member-intr-title-wrap">
+                                                <div class="member-intr-title">官方模考码</div>
+                                                <div class="member-intro-target">
+
+                                                </div>
+                                                <div class="member-intr-price text-right">
+                                                    <span class="member-intr-price-symbol">¥</span><span class="member-intr-price-txt">435</span>/次
+                                                    <div class="member-intr-price-origin">¥2999</div>
+                                                    <div class="open-item-discount">限时折扣</div>
+                                                </div>
+                                            </div>
+                                            <p class="member-intro-character">
+                                                赠送四小时是试听课程，免费领机经APP。
+                                            </p>
+                                            <div class="member-upgrade-btn-wrap"><!--  ng-if="memberData.vipLevel <= 1 && memberData.vipLevel != -1" -->
+                                                <!-- <a class="member-upgrade-btn" href="https://item.taobao.com/item.htm?spm=a230r.1.14.43.24ef7453JUPocp&id=571172439152&ns=1&abbucket=3#detail" target="_black">立即申请</a> -->
+                                                <!-- ICP备案临时代码  -->
+                                                <a class="member-upgrade-btn cursor"  @click='detailedClassFive()'>点击查看</a>
+                                            </div>
+                                        </dt>
+                                </dl>
+                                </li>
+                                <li class="member-introduction-item show member-gold">
+                                    <dl>
+                                        <dt class="member-intr-header">
+                                            <div class="member-intr-title-wrap">
+                                                <div class="member-intr-title">口语突破班</div>
+                                                <div class="member-intro-target">
+                                                    18课时
+                                                </div>
+                                                <div class="member-intr-price text-right">
+                                                    <span class="member-intr-price-symbol">¥</span><span class="member-intr-price-txt">2499</span>/月
+                                                    <div class="member-intr-price-origin">¥2999</div>
+                                                    <div class="open-item-discount">限时折扣</div>
+                                                </div>
+                                            </div>
+                                            <p class="member-intro-character">
+                                                适用于口语分数不够的同学，小白和考过很多次的考生都适用
+                                            </p>
+                                            <div class="member-upgrade-btn-wrap"><!--  ng-if="memberData.vipLevel <= 1 && memberData.vipLevel != -1" -->
+                                                <!-- <a class="member-upgrade-btn" href="https://item.taobao.com/item.htm?spm=a230r.1.14.60.24ef7453JUPocp&id=564409970657&ns=1&abbucket=3#detail" target="_black">立即申请</a> -->
+                                                <!-- ICP备案临时代码  -->
+                                                <a class="member-upgrade-btn cursor"  @click='detailedClassSix()'>点击查看</a>
+                                            </div>
+                                        </dt>
+                                </dl>
+                                </li>
+                                <li class="member-introduction-item show member-gold">
+                                    <dl>
+                                        <dt class="member-intr-header">
+                                            <div class="member-intr-title-wrap">
+                                                <div class="member-intr-title">全项保过班</div>
+                                                <div class="member-intro-target">
+                                                    68课时
+                                                </div>
+                                                <div class="member-intr-price text-right">
+                                                    <span class="member-intr-price-symbol">¥</span><span class="member-intr-price-txt">8999</span>/月
+                                                    <div class="member-intr-price-origin">¥10999</div>
+                                                    <div class="open-item-discount">限时折扣</div>
+                                                </div>
+                                            </div>
+                                            <p class="member-intro-character">
+                                                适用于小白，目标分数为65分以上的同学
+                                            </p>
+                                            <div class="member-upgrade-btn-wrap"><!--  ng-if="memberData.vipLevel <= 2 && memberData.vipLevel != -1" -->
+                                                <!-- <a class="member-upgrade-btn" href="https://item.taobao.com/item.htm?spm=a230r.1.14.38.24ef7453JUPocp&id=565472946559&ns=1&abbucket=3#detail" target="_black">立即申请</a> -->
+                                                <!-- ICP备案临时代码  -->
+                                                <a class="member-upgrade-btn cursor"  @click='detailedClassSeven()'>点击查看</a>
+                                            </div>
+                                        </dt>
+                                </dl>
+                                </li>
+                                <li class="member-introduction-item show member-gold">
+                                    <dl>
+                                        <dt class="member-intr-header">
+                                            <div class="member-intr-title-wrap">
+                                                <div class="member-intr-title">79分高阶班</div>
+                                                <div class="member-intro-target">
+                                                    32课时
+                                                </div>
+                                                <div class="member-intr-price text-right">
+                                                    <span class="member-intr-price-symbol">¥</span><span class="member-intr-price-txt">7499</span>/月
+                                                    <div class="member-intr-price-origin">¥8999</div>
+                                                    <div class="open-item-discount">限时折扣</div>
+                                                </div>
+                                            </div>
+                                            <p class="member-intro-character">
+                                                适用于四项65分及以上的同学，4-8人班，讲授听说读写高分技巧，帮你学透每一道题，
+                                            </p>
+                                            <div class="member-upgrade-btn-wrap"><!--  ng-if="memberData.vipLevel <= 2 && memberData.vipLevel != -1" -->
+                                                <!-- <a class="member-upgrade-btn" href="https://item.taobao.com/item.htm?spm=a1z38n.10677092.0.0.69051debBortRW&id=580459589370" target="_black">立即申请</a> -->
+                                                <!-- ICP备案临时代码  -->
+                                                <a class="member-upgrade-btn cursor"  @click='detailedClassEight()'>点击查看</a>
+                                            </div>
+                                        </dt>
+                                </dl>
+                                </li>
+                                <!-- icp新增代码 -->
+                                <li class="member-introduction-item show member-gold">
+                                    <dl>
+                                        <dt class="member-intr-header">
+                                            <div class="member-intr-title-wrap">
+                                                <div class="member-intr-title">一对一冲分班</div>
+                                                <div class="member-intro-target">
+                                                    按课时收费
+                                                </div>
+                                                <div class="member-intr-price text-right">
+                                                    <span class="member-intr-price-symbol">¥</span><span class="member-intr-price-txt">650</span>/hr
+                                                    <div class="member-intr-price-origin">¥699</div>
+                                                    <div class="open-item-discount">限时折扣</div>
+                                                </div>
+                                            </div>
+                                            <p class="member-intro-character">
+                                                适用于短期需要达目标分，各个项目有一定基础，上课时间灵活的同学
+                                            </p>
+                                            <div class="member-upgrade-btn-wrap"><!--  ng-if="memberData.vipLevel <= 2 && memberData.vipLevel != -1" -->
+                                                <!-- <a class="member-upgrade-btn" href="https://item.taobao.com/item.htm?spm=a1z38n.10677092.0.0.69051debBortRW&id=580459589370" target="_black">立即申请</a> -->
+                                                <!-- ICP备案临时代码  -->
+                                                <a class="member-upgrade-btn cursor"  @click='detailedClassNine()'>点击查看</a>
+                                            </div>
+                                        </dt>
+                                </dl>
+                                </li>
+                                <li class="member-introduction-item show member-gold">
+                                    <dl>
+                                        <dt class="member-intr-header">
+                                            <div class="member-intr-title-wrap">
+                                                <div class="member-intr-title">一对一强化班</div>
+                                                <div class="member-intro-target">
+                                                    按课时收费
+                                                </div>
+                                                <div class="member-intr-price text-right">
+                                                    <span class="member-intr-price-symbol">¥</span><span class="member-intr-price-txt">700</span>/hr
+                                                    <div class="member-intr-price-origin">¥799</div>
+                                                    <div class="open-item-discount">限时折扣</div>
+                                                </div>
+                                            </div>
+                                            <p class="member-intro-character">
+                                                适用于短期需要达目标分，各个项目有一定基础，上课时间灵活的同学
+                                            </p>
+                                            <div class="member-upgrade-btn-wrap"><!--  ng-if="memberData.vipLevel <= 2 && memberData.vipLevel != -1" -->
+                                                <!-- <a class="member-upgrade-btn" href="https://item.taobao.com/item.htm?spm=a1z38n.10677092.0.0.69051debBortRW&id=580459589370" target="_black">立即申请</a> -->
+                                                <!-- ICP备案临时代码  -->
+                                                <a class="member-upgrade-btn cursor"  @click='detailedClassTen()'>点击查看</a>
+                                            </div>
+                                        </dt>
+                                </dl>
+                                </li>
+                                <li class="member-introduction-item show member-gold">
+                                    <dl>
+                                        <dt class="member-intr-header">
+                                            <div class="member-intr-title-wrap">
+                                                <div class="member-intr-title">一对一技巧班</div>
+                                                <div class="member-intro-target">
+                                                    按课时收费
+                                                </div>
+                                                <div class="member-intr-price text-right">
+                                                    <span class="member-intr-price-symbol">¥</span><span class="member-intr-price-txt">800</span>/hr
+                                                    <div class="member-intr-price-origin">¥899</div>
+                                                    <div class="open-item-discount">限时折扣</div>
+                                                </div>
+                                            </div>
+                                            <p class="member-intro-character">
+                                                适用于短期需要达目标分，各个项目有一定基础，上课时间灵活的同学
+                                            </p>
+                                            <div class="member-upgrade-btn-wrap"><!--  ng-if="memberData.vipLevel <= 2 && memberData.vipLevel != -1" -->
+                                                <!-- <a class="member-upgrade-btn" href="https://item.taobao.com/item.htm?spm=a1z38n.10677092.0.0.69051debBortRW&id=580459589370" target="_black">立即申请</a> -->
+                                                <!-- ICP备案临时代码  -->
+                                                <a class="member-upgrade-btn cursor"  @click='detailedClassEleven()'>点击查看</a>
+                                            </div>
+                                        </dt>
+                                </dl>
+                                </li>
+                                <li class="member-introduction-item show member-gold">
+                                    <dl>
+                                        <dt class="member-intr-header">
+                                            <div class="member-intr-title-wrap">
+                                                <div class="member-intr-title">一对一突破班</div>
+                                                <div class="member-intro-target">
+                                                    按课时收费
+                                                </div>
+                                                <div class="member-intr-price text-right">
+                                                    <span class="member-intr-price-symbol">¥</span><span class="member-intr-price-txt">450</span>/hr
+                                                    <div class="member-intr-price-origin">¥499</div>
+                                                    <div class="open-item-discount">限时折扣</div>
+                                                </div>
+                                            </div>
+                                            <p class="member-intro-character">
+                                                适用于短期需要达目标分，各个项目有一定基础，上课时间灵活的同学
+                                            </p>
+                                            <div class="member-upgrade-btn-wrap"><!--  ng-if="memberData.vipLevel <= 2 && memberData.vipLevel != -1" -->
+                                                <!-- <a class="member-upgrade-btn" href="https://item.taobao.com/item.htm?spm=a1z38n.10677092.0.0.69051debBortRW&id=580459589370" target="_black">立即申请</a> -->
+                                                <!-- ICP备案临时代码  -->
+                                                <a class="member-upgrade-btn cursor"  @click='detailedClassTwelve()'>点击查看</a>
+                                            </div>
+                                        </dt>
+                                </dl>
+                                </li>
+                                <li class="member-introduction-item show member-gold">
+                                    <dl>
+                                        <dt class="member-intr-header">
+                                            <div class="member-intr-title-wrap">
+                                                <div class="member-intr-title">听力随到班</div>
+                                                <div class="member-intro-target">
+                                                    24课时
+                                                </div>
+                                                <div class="member-intr-price text-right">
+                                                    <span class="member-intr-price-symbol">¥</span><span class="member-intr-price-txt">3499</span>/月
+                                                    <div class="member-intr-price-origin">¥3999</div>
+                                                    <div class="open-item-discount">限时折扣</div>
+                                                </div>
+                                            </div>
+                                            <p class="member-intro-character">
+                                                适用于所有考生，尤其适合小白和听力无法突破的同学
+                                            </p>
+                                            <div class="member-upgrade-btn-wrap"><!--  ng-if="memberData.vipLevel <= 2 && memberData.vipLevel != -1" -->
+                                                <!-- <a class="member-upgrade-btn" href="https://item.taobao.com/item.htm?spm=a1z38n.10677092.0.0.69051debBortRW&id=580459589370" target="_black">立即申请</a> -->
+                                                <!-- ICP备案临时代码  -->
+                                                <a class="member-upgrade-btn cursor"  @click='detailedClassThirteen()'>点击查看</a>
+                                            </div>
+                                        </dt>
+                                </dl>
+                                </li>
+                                <li class="member-introduction-item show member-gold">
+                                    <dl>
+                                        <dt class="member-intr-header">
+                                            <div class="member-intr-title-wrap">
+                                                <div class="member-intr-title">阅读随到班</div>
+                                                <div class="member-intro-target">
+                                                    24课时
+                                                </div>
+                                                <div class="member-intr-price text-right">
+                                                    <span class="member-intr-price-symbol">¥</span><span class="member-intr-price-txt">3499</span>/月
+                                                    <div class="member-intr-price-origin">¥3999</div>
+                                                    <div class="open-item-discount">限时折扣</div>
+                                                </div>
+                                            </div>
+                                            <p class="member-intro-character">
+                                                适用于所有考生，尤其适合小白和阅读无法突破的同学
+                                            </p>
+                                            <div class="member-upgrade-btn-wrap"><!--  ng-if="memberData.vipLevel <= 2 && memberData.vipLevel != -1" -->
+                                                <!-- <a class="member-upgrade-btn" href="https://item.taobao.com/item.htm?spm=a1z38n.10677092.0.0.69051debBortRW&id=580459589370" target="_black">立即申请</a> -->
+                                                <!-- ICP备案临时代码  -->
+                                                <a class="member-upgrade-btn cursor"  @click='detailedClassFourteen()'>点击查看</a>
+                                            </div>
+                                        </dt>
+                                </dl>
+                                </li>
+                                <li class="member-introduction-item show member-gold">
+                                    <dl>
+                                        <dt class="member-intr-header">
+                                            <div class="member-intr-title-wrap">
+                                                <div class="member-intr-title">口语随到班</div>
+                                                <div class="member-intro-target">
+                                                    24课时
+                                                </div>
+                                                <div class="member-intr-price text-right">
+                                                    <span class="member-intr-price-symbol">¥</span><span class="member-intr-price-txt">3499</span>/月
+                                                    <div class="member-intr-price-origin">¥3999</div>
+                                                    <div class="open-item-discount">限时折扣</div>
+                                                </div>
+                                            </div>
+                                            <p class="member-intro-character">
+                                                适用于所有考生，尤其适合小白和口语无法突破的同学
+                                            </p>
+                                            <div class="member-upgrade-btn-wrap"><!--  ng-if="memberData.vipLevel <= 2 && memberData.vipLevel != -1" -->
+                                                <!-- <a class="member-upgrade-btn" href="https://item.taobao.com/item.htm?spm=a1z38n.10677092.0.0.69051debBortRW&id=580459589370" target="_black">立即申请</a> -->
+                                                <!-- ICP备案临时代码  -->
+                                                <a class="member-upgrade-btn cursor"  @click='detailedClassFifteen()'>点击查看</a>
+                                            </div>
+                                        </dt>
+                                </dl>
+                                </li>
+                                <li class="member-introduction-item show member-gold">
+                                    <dl>
+                                        <dt class="member-intr-header">
+                                            <div class="member-intr-title-wrap">
+                                                <div class="member-intr-title">写作随到班</div>
+                                                <div class="member-intro-target">
+                                                    24课时
+                                                </div>
+                                                <div class="member-intr-price text-right">
+                                                    <span class="member-intr-price-symbol">¥</span><span class="member-intr-price-txt">3499</span>/月
+                                                    <div class="member-intr-price-origin">¥3999</div>
+                                                    <div class="open-item-discount">限时折扣</div>
+                                                </div>
+                                            </div>
+                                            <p class="member-intro-character">
+                                                适用于所有考生，尤其适合小白和写作无法突破的同学
+                                            </p>
+                                            <div class="member-upgrade-btn-wrap"><!--  ng-if="memberData.vipLevel <= 2 && memberData.vipLevel != -1" -->
+                                                <!-- <a class="member-upgrade-btn" href="https://item.taobao.com/item.htm?spm=a1z38n.10677092.0.0.69051debBortRW&id=580459589370" target="_black">立即申请</a> -->
+                                                <!-- ICP备案临时代码  -->
+                                                <a class="member-upgrade-btn cursor"  @click='detailedClassSixteen()'>点击查看</a>
+                                            </div>
+                                        </dt>
+                                </dl>
+                                </li>
+                            </ul>
+                            <div style="clear: both;"></div>
+                        </div>
+                            <div style="clear: both;"></div>
+                    </section>
+                </div>
+
+<footer>
+    <div class="container">
+        <!-- <div class="row">
+            <img src="/static/../static/images/new_home/footer_logo.png" class="logo footer-logo">
+        </div> -->
+        <div class="row">
+            <div class="col-md-8">
+                <ul class="footer-nav-container">
+                    <router-link to="/">
+                        <li><a class="container-intro">首页</a><i class="disc"></i></li>
+                    </router-link>
+                    <router-link to="/CaseOperate">
+                        <li><a class="container-intro">课程&会员</a><i class="disc"></i></li>
+                    </router-link>
+                    <router-link to="/Member">
+                        <li><a class="container-intro">用户案例</a><i class="disc"></i></li>
+                    </router-link>
+                    <!-- icp临时取消 -->
+                    <!-- <router-link to="/InstructionalVideo">
+                        <li><a class="container-intro">教学视频</a><i class="disc"></i></li>
+                    </router-link>
+                    <router-link to="/Portal">
+                        <li><a class="container-intro">用户社区</a><i class="disc"></i></li>
+                    </router-link> -->
+                    <router-link to="/AboutUs">
+                        <li class="container-intro">公司简介<i class="disc"></i></li>
+                    </router-link>
+                    <li id="showPCall">联系我们</li>
+                </ul>
+                <ul class="contact-container footer-mesg">
+                    <li><i class="ico ico-address"></i>深圳市南山区南山街道南海大道西桂庙路北阳光华艺大厦1栋4F、4G-20</li>
+                    <li><a href="https://www.zhihu.com/org/ptehei-ke-ji/posts"><i class="ico ico-zhihu"></i>黑科技PTE</a></li>
+                    <li><i class="ico ico-phone"></i>400-101-9155</li>
+                    <li><a id="email_contact" href="mailto:info@ikk.ai"><i class="ico ico-email"></i>info@ikk.ai</a></li>
+                </ul>
+                <p class="copyright">收款人邮箱：948674232@qq.com，zhaot90@gmail.com</p>
+                <p class="copyright">Copyright 2017 - 2018 粤ICP备18023850号  ikk. All Rights Reserved.<span>深圳市科科智能科技有限公司 版权所有</span></p>
+            </div>
+            <div class="col-md-2 footer-code">
+                <p class="code-name">PTE微信公众号</p>
+                <img src="../static/images/unified-baidu-statistics.jpg" width="100px">
+                <p class="code-info">更多PTE热门资讯</p>
+            </div>
+            <div class="col-md-2 footer-code">
+                <p class="code-name">PTE小程序</p>
+                <img src="../static/images/offical_weichat_1a0871c.jpg" width="100px">
+                <p class="code-info">扫TA随时开始学习</p>
+            </div>
+            <div class="col-md-2 footer-code">
+                <p class="code-name">客服二维码</p>
+                <img src="../static/images/unified-baidu-statistics.jpg" width="100px">
+                <p class="code-info">咨询更多问题</p>
+            </div>
+        </div>
+    </div>
+</footer>
+        </div>
+
+    <!-- 写一个不可被关闭的弹窗让用户去访问正式网站 -->
+    <v-dialog
+      v-model="isIntoFormalWebsite"
+      width="500"
+    >
+      <v-card>
+        <v-card-title
+          class="headline grey lighten-2"
+          primary-title
+        >
+          您没有访问该网站的权限
+        </v-card-title>
+
+        <v-card-text>
+          <div style="font-size:16px;">
+              <p>请访问PTE黑科技正式网站</p><span class="pr-2">国内用户:</span><a style="color:#0CA3F4" href="https://pte-ai.com" target="_blank">https://pte-ai</a></br><span class="pr-2">澳洲用户:</span><a style="color:#0CA3F4" href="https://pte.ai" target="_blank">https://pte.ai</a>
+          </div>
+        </v-card-text>
+
+        <v-divider></v-divider>
+
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn
+            color="primary"
+            flat
+            @click="isIntoFormalWebsite = false"
+          >
+            继续游览
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+
+
+
+
+    </div>
+</body>
+</html>
+
+
+<!-- 
+
+<script>
+var isShowLoginBox = false;
+import AV from 'leancloud-storage'
+  import {
+    LoginVerify
+  } from '@/api/user'
+import '../../assets/js/public.js'
+import {temporary} from '@/util/temporary'
+import { initUserData } from '@/util/initUserData.js'
+
+  /* eslint-disable */
+  export default {
+    data () {
+      return {
+          isIntoFormalWebsite: false,  //用户没有stg权限时的弹窗
+          dialogContent:{
+            content:'该网址是PTE黑科技平台的测试网站，可能会存在一些bug，您确定继续使用吗?(点击取消即可进入正式练习网站)'
+            },
+          isLiveStgWebsite:false,  //用户是否在stg分支上
+          isShowCourseOrMember:true,
+          isShowLoginState:false,
+          loginState:'',
+          isShowSolveBtn:false,
+          isShowTemporary:false, // ICP备案临时代码
+          isShowList:true, // ICP备案临时代码
+          items:[],
+          index:0
+      }
+    },
+    created(){
+        let path =  window.location.href;
+        if( path.indexOf('localhost') == -1){
+            if( path.indexOf('stg') != -1){
+                // 用户当前在 stg分支上
+                this.isLiveStgWebsite = true;
+            }else{
+                // 当用户不在 stg 上时，直接检查用户是否符合自己所在国家访问的网址 如果不正确 直接跳转
+                this.checkCity()
+            }
+        }
+        this.showList()
+    },
+    mounted(){
+
+    },
+    updated(){
+
+    },
+    methods:{
+        checkCity(){
+            // 两个开关  flag检测是否是国内的链接。请求接口后 咱判断 是国内还是 国外，两层判断实现 当前用户是否符合自己所在国家所访问的链接
+            let href = window.location.host;
+             $.ajax({
+                type:'GET',
+                url:'https://ipapi.co/json/',
+                async:true,
+                success:function(res){
+                    if(res.country_name == 'China' && res.country == 'CN'){
+                        if( href.indexOf('pte-ai') == -1 ){
+                            // window.location.href = 'https://pte-ai.com';
+                            this.isIntoFormalWebsite = true;
+                        }
+                    }else{   // 国外
+                        if(href.indexOf('pte.ai') == -1){   //跳转到国内的链接  pte-ai
+                            // window.location.href = 'https://pte.ai';
+                            this.isIntoFormalWebsite = true;
+                        }
+                    }
+                }
+                ,error:function(err){
+                    console.log('请求失败');
+                }
+            })
+        },
+        changeShowMember(){
+            this.isShowCourseOrMember = false;
+        },
+        changeShowCourse(){
+            this.isShowCourseOrMember = true;
+        },
+        closeRequest(){
+            isShowLoginBox = false;
+            $('#login_box.login-J-down-load-app').hide();
+        },
+        loginWebSite(){
+            let that = this;
+            this.isShowSolveBtn = false;
+            this.isShowLoginState = false;
+            isShowLoginBox = true;
+            $('#login_box.login-J-down-load-app').show();
+            AV.User.logOut();
+            this.$store.dispatch('logOut')
+            //加载数据
+            $.ajax({
+                type:'GET',
+                url:"https://stg-pteppp.leanapp.cn/weblogin/getqr/",
+                data:{},
+                async:true,
+                success:function(res){
+                    $('.login-download-modal-wrapper .login-content .erweima').attr('src',res.qr);
+                    that.obtainLoginState(res.session);
+                },
+                error:function(error){
+                    console.log(error);
+                }
+            })
+        },
+        obtainLoginState(id){
+            var timer = null;
+            clearTimeout(timer);
+            let that = this;
+            $.ajax({
+                type:"Get",
+                url:"https://stg-pteppp.leanapp.cn/weblogin/update/"+id+"",
+                data:{},
+                async:true,
+                success:function(res){
+                    let state = res.state;
+                    if(state ==='normal'){
+                        if(isShowLoginBox){
+                            timer = setTimeout(() => {
+                            that.obtainLoginState(id);
+                            },1000);
+                        }
+                    }else if(state ==='scan'){
+                        if(isShowLoginBox){
+                            timer = setTimeout(() => {
+                            that.obtainLoginState(id);
+                            },1000);
+                        }
+                        $('.login-download-modal-wrapper .login-content .erweima').attr('src','../static/images/load.gif');
+                        that.loginState = '已扫码';
+                        that.isShowLoginState = true;
+                    }else if(state == 'auth'){
+                        that.loginState = '正在登录';
+                        that.userLogin(res)
+                    }else if(state == 'invalid'){
+                        that.loginState = '已失效';
+                    }
+                },
+                error:function(){
+                    that.loginState = '登录失败，请重试';
+                    that.isShowLoginState = true;
+                }
+            })
+        },
+        solveExtent(){
+            this.loginWebSite();
+        },
+        async LoginVerifyData () {
+            try {
+                return await LoginVerify()
+            } catch (err) {
+                // this.WarnError(err);
+                console.log(err)
+                return Promise.reject(err)
+            }
+
+        },
+        loginEvent(){
+            // 在路径跳转之前 先检查用户 是否在stg分支 以及 是否有stg的权限
+            if(this.isLiveStgWebsite){
+                //检测用户是否 有stg的权限： 用户信息中 有envs:array key值，并且里面存在 staging 值
+                if(window.userJSON.envs && window.userJSON.envs.includes("staging")){
+                    initUserData()
+                    // 有权限
+                    this.$router.push({ path: '/index' })
+                }else{
+                    // 当没有权限时，直接弹出一个不可被关闭的窗口，让用户去访问正式网站
+                    this.closeRequest();
+                    this.isIntoFormalWebsite = true;
+                }
+                // 在stg时，需要检测用户是否有stg的权限
+            }else{
+                    initUserData()
+                // 不在  stg分支上 直接进入网站
+                this.$router.push({ path: '/index' })
+            }
+        },
+        onSession(res){
+            if(res && res.auth.session){
+                console.log('进入session');
+                return AV.User.become(res.auth.session)
+            }else{
+                return AV.User.loginWithAuthData(Object.assign({},{session:res.auth.code}), 'lc_weapp', { failOnNotExist: true })
+            }
+        },
+        userLogin(res){
+            let that = this;
+            try {
+                let auth = res.auth
+                this.onSession(res)
+                // AV.User.loginWithAuthData(res.auth, 'lc_weapp', {
+                //     failOnNotExist: true
+                // })
+                .then(user => {
+                    // window.userJSON = JSON.parse(JSON.stringify(user))
+                    window.userJSON = user.toJSON();
+                    // commit to vuex
+                    this.$store.dispatch('user_login', window.userJSON)
+                    return this.LoginVerifyData()
+                })
+                .then(() =>{
+                    this.loginEvent()
+                })
+                .catch(err => {
+                    this.WarnError(err);
+                })
+            } catch (error) {
+                this.WarnError(error);
+            }
+        },
+        WarnError(Error){
+           let obj = JSON.parse(JSON.stringify(Error));
+            let str = obj.rawMessage || obj.error;
+            this.loginState = str;
+            this.isShowSolveBtn = true;
+            $('.login-download-modal-wrapper .login-content .erweima').attr('src','../static/images/unified-baidu-statistics.jpg');
+        },
+        // 以下都是临时
+        showList(){
+            let classUrl =  window.location.href
+            if(classUrl.indexOf('list') == -1){
+                this.isShowTemporary = false;
+            }else if(classUrl.indexOf('list0') !== -1){
+                this.isShowList = false;
+                this.isShowTemporary = true;
+                this.items = temporary.items[0]
+            }else if(classUrl.indexOf('list1') !== -1){
+                this.isShowList = false;
+                this.isShowTemporary = true;
+                this.items = temporary.items[1]
+            }else if(classUrl.indexOf('list2') !== -1){
+                this.isShowList = false;
+                this.isShowTemporary = true;
+                this.items = temporary.items[2]
+            }else if(classUrl.indexOf('list3') !== -1){
+                this.isShowList = false;
+                this.isShowTemporary = true;
+                this.items = temporary.items[3]
+            }else if(classUrl.indexOf('list4') !== -1){
+                this.isShowList = false;
+                this.isShowTemporary = true;
+                this.items = temporary.items[4]
+            }else if(classUrl.indexOf('list5') !== -1){
+                this.isShowList = false;
+                this.isShowTemporary = true;
+                this.items = temporary.items[5]
+            }else if(classUrl.indexOf('list6') !== -1){
+                this.isShowList = false;
+                this.isShowTemporary = true;
+                this.items = temporary.items[6]
+            }else if(classUrl.indexOf('list7') !== -1){
+                this.isShowList = false;
+                this.isShowTemporary = true;
+                this.items = temporary.items[7]
+            }else if(classUrl.indexOf('list8') !== -1){
+                this.isShowList = false;
+                this.isShowTemporary = true;
+                this.items = temporary.items[8]
+            }else if(classUrl.indexOf('list9') !== -1){
+                this.isShowList = false;
+                this.isShowTemporary = true;
+                this.items = temporary.items[9]
+            }else if(classUrl.indexOf('lista') !== -1){
+                this.isShowList = false;
+                this.isShowTemporary = true;
+                this.items = temporary.items[10]
+            }else if(classUrl.indexOf('listb') !== -1){
+                this.isShowList = false;
+                this.isShowTemporary = true;
+                this.items = temporary.items[11]
+            }else if(classUrl.indexOf('listc') !== -1){
+                this.isShowList = false;
+                this.isShowTemporary = true;
+                this.items = temporary.items[12]
+            }else if(classUrl.indexOf('listd') !== -1){
+                this.isShowList = false;
+                this.isShowTemporary = true;
+                this.items = temporary.items[13]
+            }else if(classUrl.indexOf('liste') !== -1){
+                this.isShowList = false;
+                this.isShowTemporary = true;
+                this.items = temporary.items[14]
+            }else if(classUrl.indexOf('listf') !== -1){
+                this.isShowList = false;
+                this.isShowTemporary = true;
+                this.items = temporary.items[15]
+            }else if(classUrl.indexOf('listg') !== -1){
+                this.isShowList = false;
+                this.isShowTemporary = true;
+                this.items = temporary.items[16]
+            }else if(classUrl.indexOf('listh') !== -1){
+                this.isShowList = false;
+                this.isShowTemporary = true;
+                this.items = temporary.items[17]
+            }else if(classUrl.indexOf('listi') !== -1){
+                this.isShowList = false;
+                this.isShowTemporary = true;
+                this.items = temporary.items[18]
+            }
+
+        },
+        detailedClassOne(){
+            let routeUrl = this.$router.resolve({
+                path: "/CaseOperate",
+            });
+            window.open(routeUrl .href+`?list`+0, '_blank');
+        },
+        detailedClassTwo(){
+            let routeUrl = this.$router.resolve({
+                path: "/CaseOperate",
+            });
+            window.open(routeUrl .href+`?list`+1, '_blank');
+        },
+        detailedClassThree(){
+            let routeUrl = this.$router.resolve({
+                path: "/CaseOperate",
+            });
+            window.open(routeUrl .href+`?list`+2, '_blank');
+        },
+        detailedClassFour(){
+            let routeUrl = this.$router.resolve({
+                path: "/CaseOperate",
+            });
+            window.open(routeUrl .href+`?list`+3, '_blank');
+        },
+        detailedClassFive(){
+            let routeUrl = this.$router.resolve({
+                path: "/CaseOperate",
+            });
+            window.open(routeUrl .href+`?list`+4, '_blank');
+        },
+        detailedClassSix(){
+            let routeUrl = this.$router.resolve({
+                path: "/CaseOperate",
+            });
+            window.open(routeUrl .href+`?list`+5, '_blank');
+        },
+        detailedClassSeven(){
+            let routeUrl = this.$router.resolve({
+                path: "/CaseOperate",
+            });
+            window.open(routeUrl .href+`?list`+6, '_blank');
+        },
+        detailedClassEight(){
+            let routeUrl = this.$router.resolve({
+                path: "/CaseOperate",
+            });
+            window.open(routeUrl .href+`?list`+7, '_blank');
+        },
+        detailedClassNine(){
+            let routeUrl = this.$router.resolve({
+                path: "/CaseOperate",
+            });
+            window.open(routeUrl .href+`?list`+8, '_blank');
+        },
+        detailedClassTen(){
+            let routeUrl = this.$router.resolve({
+                path: "/CaseOperate",
+            });
+            window.open(routeUrl .href+`?list`+9, '_blank');
+        },
+        detailedClassEleven(){
+            let routeUrl = this.$router.resolve({
+                path: "/CaseOperate",
+            });
+            window.open(routeUrl .href+`?list`+`a`, '_blank');
+        },
+        detailedClassTwelve(){
+            let routeUrl = this.$router.resolve({
+                path: "/CaseOperate",
+            });
+            window.open(routeUrl .href+`?list`+`b`, '_blank');
+        },
+        detailedClassThirteen(){
+            let routeUrl = this.$router.resolve({
+                path: "/CaseOperate",
+            });
+            window.open(routeUrl .href+`?list`+`c`, '_blank');
+        },
+        detailedClassFourteen(){
+            let routeUrl = this.$router.resolve({
+                path: "/CaseOperate",
+            });
+            window.open(routeUrl .href+`?list`+`d`, '_blank');
+        },
+        detailedClassFifteen(){
+            let routeUrl = this.$router.resolve({
+                path: "/CaseOperate",
+            });
+            window.open(routeUrl .href+`?list`+`e`, '_blank');
+        },
+        detailedClassSixteen(){
+            let routeUrl = this.$router.resolve({
+                path: "/CaseOperate",
+            });
+            window.open(routeUrl .href+`?list`+`f`, '_blank');
+        },
+        detailedClassSeventeen(){
+            let routeUrl = this.$router.resolve({
+                path: "/CaseOperate",
+            });
+            window.open(routeUrl .href+`?list`+`g`, '_blank');
+        },
+        detailedClassEighteen(){
+            let routeUrl = this.$router.resolve({
+                path: "/CaseOperate",
+            });
+            window.open(routeUrl .href+`?list`+`h`, '_blank');
+        },
+        detailedClassNineteen(){
+            let routeUrl = this.$router.resolve({
+                path: "/CaseOperate",
+            });
+            window.open(routeUrl .href+`?list`+`i`, '_blank');
+        },
+        //以上都是临时代码
+    }
+  }
+</script>
+
+<style>
+  @import "../../less/Landing/auto_combine_73112_320ecc7.less";
+  @import "../../less/Landing/auto_combine_e9548_3e22ea4.less";
+  @import "../../less/Landing/common.less";
+  .container-intro{
+      color: #fff !important;
+  }
+    .solve{
+         padding: 0 20px;
+         height:40px;
+         margin-top:10px;
+         border-radius:4px;
+         color:#fff;
+         font-size:16px;
+         box-shadow:0 0 5px #00b3fe;
+         background:#1bd1fc;
+         letter-spacing:1px;
+         &:hover{
+            box-shadow:0 0 10px #00b3fe;
+         }
+    }
+    .temporary{
+        display:flex;
+        justify-content: space-around;
+        color:#333;
+
+    }
+    .classList{
+        display:flex;
+        align-items:center;
+        padding-bottom:10px;
+    }
+    .temporaryLeft{
+        width:60%;
+        padding-top:30px;
+    }
+    .temporaryRight{
+        width:20%;
+        padding-top:30px;
+    }
+    .item-title{
+        color: rgba(10,18,32,.46);
+        font-weight: 700;
+        line-height: 48px;
+        font-size:18px;
+    }
+    .item-content{
+        font-size:20px;
+    }
+</style> -->

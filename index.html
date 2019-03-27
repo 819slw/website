@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Page Title</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" media="screen" href="./static/css/indexPage.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="./static/css/auto_combine_27876_2f360d4.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="./static/css/common.css" />
+  <link href="https://cdn.bootcss.com/layer/2.3/skin/layer.css" rel="stylesheet">
+  <link rel="stylesheet" href="./static/css/layui.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+  <script src="./static/js/layui.js"></script>
+  <script src="./static/js/public.js"></script>
+</head>
+<body>
+      <!-- 微信浏览器打开的时候看到的页面 -->
+<!-- <div v-if='isWeChat'  class='wechatshow'>
+  <img src="./static/images/banner2_c078255.png" alt="" class='wechatback'>
+  <div class='wechattop'>
+      <img class = 'logotop' src="../../../static/images/modeltest/logoright.png" alt="">
+      <p>抱歉，暂不支持您当前的浏览器</p>
+      <span>推荐使用Chrome的最新版本进行操作</span>
+      <span>我们会尽快支持更多的浏览器</span>
+      <a href="https://www.google.cn/chrome/" target="_black"><span style='color:#261CDC;margin:5px;display: flex;justify-content: center;align-items: center;'>点击使用最新版<img style='width:15px;height:15px;' src="../../.../static/images/google.png" alt="">谷歌浏览器</span></a>
+      <a href="https://www.google.cn/chrome/" target="_black"><span style='color:#261CDC;margin:5px;display: flex;justify-content: center;align-items: center;'>体验网站全部功能</span></a>
+  </div>
+  <div class='mask'></div>
+</div> -->
+
+
+<div id="login_home" class="login-home" v-if='!isWeChat'>
+<div class="bdp-personal" id="init_scroll" style="position:relative">
+
+
+
+
+<!-- 扫描二维码 -->
+<div class="erweima-download-modal-wrapper erweima-J-down-load-app" style="display: none;">
+  <div class="erweima-download-modal-bg"></div>
+  <div class="erweima-download-modal">
+      <div class="download-modal-header">
+          <div class="erweima-modal-close"></div>
+      </div>
+      <div class="download-modal-body">
+          <div class="download-title">扫描二维码 下载APP</div>
+          <div class="download-sub-title"></div>
+          <img class="download-code" src="./static/images/offical_weichat_1a0871c.jpg">
+      </div>
+  </div>
+</div>
+
+ <!-- //登陆弹出框 -->
+<div class="login-download-modal-wrapper login-J-down-load-app" id="login_box">
+  <div class="login-download-modal-bg" @click="closeRequest()"></div>
+  <div class="login-download-modal login-grid">
+    <img class="grid-top-pic" src="./static/images/loginBoxTop.png" style="max-width: 100%">
+    <div class="top-word">
+      <p class="brand-intro-font">PTE黑科技在线学习平台</p>
+      <p class="brand-edition-font">Ver 1.15.0版本</p>
+    </div>
+    <div class="login-content">
+      <img class="erweima" src="./static/images/load.gif" />
+      <div style="font-size:16px;color:red;max-width:60%" v-if="isShowLoginState">{{ loginState }}</div>
+      <p class="login-font-style">请使用微信扫描二维码登录</p>
+      <p class="login-font-style">“PTE黑科技”</p>
+      <button class="solve" v-if="isShowSolveBtn" @click="solveExtent">已解决？点击刷新</button>
+    </div>
+  </div>
+</div>
+
+<section class="home-banner-wrap J-scorll-top" id="slider">
+
+        <nav class="navbar clearfix J-nav">
+                <div class="container">
+                    <div class="navbar-header">
+                        <i class="ico-list navbar-toggle collapsed cursor"></i>
+                        <a class="navbar-logo" href="">
+                        </a>
+                    </div>
+                    <div class="navbar-collapse nav-hide" id="J-navbar-collapse">
+                        <!-- <i class="ico-close navbar-toggle close-toggle"></i> -->
+                        <i class="material-icons icon navbar-toggle close-toggle cursor">close</i>
+                        <ul class="navbar-nav nav-list navbar-left">
+                            <a href="#">
+                                <li class="nav-list-item active" id="home_page">首页</li>
+                            </a>
+                            <a href="./pages/caseOperate.html">
+                                <li class="nav-list-item" id="case_page">课程&会员</li>
+                            </a>
+                            <!-- 因为bdp做的是当游览器宽度小于992的时候 隐藏用户案例 和教学视频所以这里删除id名称 member_info  instructional_video -->
+                            <!-- 并将767宽度兼容 改为840 -->
+                            <a href="./pages/Member.html">
+                                <li class="nav-list-item" id="">用户案例</li>
+                            </a>
+                        </ul>
+                        <ul class="navbar-nav nav-button-group navbar-right">
+                            <li class="nav-list-item">
+                                <button class="download-btn btn-animation follow-Public-number"><span>免费领取资料</span></button>
+                            </li>
+                            <li class="nav-list-item">
+                                <button class="download-btn btn-animation follow-Small-program"><span>PTE交流群</span></button>
+                            </li>
+                            <li class="nav-list-item J-register-btn">
+                                <a>
+                                    <button class="signin-btn btn-animation btn-an-adverse loginWebSite"><span>注册</span></button>
+                                </a>
+                            </li>
+                            <li class="nav-list-item J-login-btn">
+                                <a>
+                                    <button class="signin-btn btn-animation btn-an-adverse loginWebSite"><span>登录</span></button>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>            
+
+        <div class="layui-carousel" id="test3" lay-filter="test4">
+            <div carousel-item="">
+                    <div class="item active">
+                        <div class="home-banner nivo-imageLink slidesjs-slide banner-3">
+                            <div class="container">
+                                <div class="banner-content">
+                                    <h3 class="banner-title">
+                                        PTE黑科技 线上课程面向全球招生
+                                    </h3>
+                                    <p class="banner-slogan">
+                                        帮你测试英语水平+量身定制课程
+                                    </p>
+                                    <div class="free-use-btn btn-white loginWebSite">
+                                        立即体验
+                                    </div>
+                                </div>
+                                <div class="banner-img">
+                                    <img src="./static/images/banner3_fe48ff4.png" alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="home-banner nivo-imageLink slidesjs-slide banner-1">
+                            <div class="container">
+                                <div class="banner-content">
+                                    <h3 class="banner-title">
+                                            PTE黑科技 超12W+用户移民留学备考选择
+                                    </h3>
+                                    <p class="banner-slogan">
+                                            智能纠音 | 智能打分 | 智能成绩单分析
+                                    </p>
+                                    <div class="free-use-btn btn-white loginWebSite">
+                                        立即体验
+                                    </div>
+                                </div>
+                                <div class="banner-img">
+                                    <img src="./static/images/banner1_56d9c8b.png" alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>   
+                    <div class="item">
+                        <div class="home-banner nivo-imageLink slidesjs-slide banner-2">
+                            <div class="container">
+                                <div class="banner-content">
+                                    <h3 class="banner-title">
+                                            年底大放送，PTE大陆地区折扣报名券
+                                    </h3>
+                                    <p class="banner-slogan">
+                                            购买报名券，即送课程优惠券，满4999送200，满7999送400 </br>截至时间2019年2月2日
+                                    </p>
+                                    <div class="free-use-btn btn-white loginWebSite">
+                                        立即体验
+                                    </div>
+                                </div>
+                                <div class="banner-img">
+                                    <img src="./static/images/banner2_c078255.png" alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="home-banner nivo-imageLink slidesjs-slide banner-5">
+                            <div class="container">
+                                <div class="banner-content">
+                                    <h3 class="banner-title">
+                                            2019年PTE黑科技寒假封闭班开始招生啦
+                                    </h3>
+                                    <p class="banner-slogan">
+                                            坐标仅限广州 郑州地区，线下冲刺班，分手PTE
+                                    </p>
+                                    <div class="free-use-btn btn-white loginWebSite">
+                                        立即体验
+                                    </div>
+                                </div>
+                                <div class="banner-img">
+                                    <img src="./static/images/banner5_23d49de.png" alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </div> 
+            </div>
+    </div>
+
+
+
+
+
+
+
+
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="feature-wrap">
+  <div class="container feature-wrap">
+      <section class="feature">
+          <h3 class="feature-title">
+              在黑科技PTE，你将收获极致的研学备考体验
+          </h3>
+          <ul class="feature-list clearfix">
+              <li class="feature-item-wrap">
+                  <div class="feature-item">
+                      <div class="symbol"><i class="ico-feature ico-feature-1"></i></div>
+                      <div class="summary">
+                          永久免费 简单易用
+                      </div>
+                      <p class="detail">
+                          无需下载，扫码登录即可。简单的操作流程，清爽的学习页面，让每个人都能轻松使用
+                      </p>
+                  </div>
+              </li>
+              <li class="feature-item-wrap">
+                  <div class="feature-item">
+                      <div class="symbol"><i class="ico-feature ico-feature-2"></i></div>
+                      <div class="summary">
+                          考题练习 多元辅助
+                      </div>
+                      <p class="detail">
+                          练习有趣，题目场景丰富。优秀练习的查阅，疑难练习的讨论，经典练习的收藏，让题目练习充满乐趣
+                      </p>
+                  </div>
+              </li>
+              <li class="feature-item-wrap">
+                  <div class="feature-item">
+                      <div class="symbol"><i class="ico-feature ico-feature-3"></i></div>
+                      <div class="summary">
+                          真题模考 沉浸体验
+                      </div>
+                      <p class="detail">
+                          模考专业，遵循培生规则。官方指定的内容，细致的评分规则，帮考生迅速适应考场环境，降低不适感，尽快融入考试氛围
+                      </p>
+                  </div>
+              </li>
+              <li class="feature-item-wrap">
+                  <div class="feature-item">
+                      <div class="symbol"><i class="ico-feature ico-feature-4"></i></div>
+                      <div class="summary">
+                          数据预测 灵活多维
+                      </div>
+                      <p class="detail">
+                          统计分析，以大数据保质。考试产生的应用数据，系统将进行综合分析和多维度下探，同时给出解决方案和计划，帮考生直面变化和问题，实现互联网督学
+                      </p>
+                  </div>
+              </li>
+              <li class="feature-item-wrap">
+                  <div class="feature-item">
+                      <div class="symbol"><i class="ico-feature ico-feature-5"></i></div>
+                      <div class="summary">
+                          题库数据 实时更新
+                      </div>
+                      <p class="detail">
+                          机经真题，实时更新上传。题库数据和考生数据保持联动，帮考生做最新的题，最有价值的题，学习效率成倍提升
+                      </p>
+                  </div>
+              </li>
+              <li class="feature-item-wrap">
+                  <div class="feature-item">
+                      <div class="symbol"><i class="ico-feature ico-feature-6"></i></div>
+                      <div class="summary">
+                          特性环绕 系统支持
+                      </div>
+                      <p class="detail">
+                          完成目标，获得各种奖励。系统将根据练习数据比对，举办丰富的学历竞赛，促进考生交流，构建PTE学习生态圈
+                      </p>
+                  </div>
+              </li>
+          </ul>
+      </section>
+<!-- 智能成绩单 -->
+  <div class="clever-report-card">
+      <div class="report-card-box">
+          <p>免费智能分析PTE成绩单</p>
+          <div>
+              <p>
+                  <span>上传成绩单，立即开启智能分析</span>
+              </p>
+          </div>
+          <div class="mt-4">
+              <v-btn color="warning" dark large class="loginWebSite">点击开启智能分析</v-btn>
+          </div>
+          </div>
+      </div>
+  </div>
+</section>
+
+<section class="introduce">
+      <!-- 搜索院校 -->
+  <div class="introduce-item clearfix">
+      <div class="wrap" id="pearson_colleges">
+          <p class="pte-title-bold">初识<b>PTE</b> ？东西在这里?</p>
+          <p style="text-align:center;font-size:16px;">PTE学术英语考试,英文名称Pearson Test of English Academic（PTE Academic),也被译为培生英语考试，是由培生教育集团（Pearson）开发并得到GMAC(Graduate Management Admission Council )认可的一款新的基于电脑的国际学术英语考试。</p>
+          <h3 class="pa-4" style="text-align:center;color:#0081A4;font-size:20px;">搜索认可PTE的学校</h3>
+          <div>
+              <p>按院校名称搜索</p>
+              <input type="text" class="form-control" placeholder="请输入院校名称">
+
+
+
+
+
+
+              <select class="form-control">
+                <option>请选择国家地区</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+              </select>
+
+
+
+              <table class="search-university-table table-bordered table table-hover">
+                <thead>
+                  <tr>
+                      <td>学校名称</td>
+                      <td>国家名称</td>
+                  </tr>
+                </thead>
+              </table>
+            
+
+
+
+
+
+              <v-text-field
+              v-model="universityName"
+              required
+              ></v-text-field>
+
+              <v-select
+              v-model="country"
+              :items="items"
+              label="请选择国家/地区"
+              required
+              ></v-select>
+
+              <template>
+                  <v-data-table
+                      v-model="selected"
+                      :headers="headers"
+                      :items="desserts"
+                      select-all
+                      item-key="name"
+                      :rows-per-page-items="[5,10]"
+                      :loading="query"
+                      class="elevation-1"
+                      v-show="!isShowUniversityInfoBox"
+                  >
+                  <v-progress-linear slot="progress" color="blue" indeterminate></v-progress-linear>
+                      <template slot="headers" slot-scope="props">
+                      <tr>
+                          <th
+                          v-for="header in props.headers"
+                          :key="header.text"
+                          >
+                          {{ header.text }}
+                          </th>
+                      </tr>
+                      </template>
+                      <template slot="items" slot-scope="props">
+                      <tr :active="props.selected" @click="seeUniversityParticular(props.item)" style="cursor:pointer">
+                          <td class="text-xs-center">{{ props.item.name }}</td>
+                          <td class="text-xs-center">{{ props.item.country }}</td>
+                      </tr>
+                      </template>
+                  </v-data-table>
+              </template>
+              <v-layout row wrap v-show="isShowUniversityInfoBox">
+                  <v-flex xs12>
+                      <v-card class="elevation-0">
+                          <v-card-title primary-title>
+                              <div>
+                                  <div class="headline">{{ universityInfo.name }}</div>
+                                  <div>{{ universityInfo.country }}</div>
+                                  <div>{{ universityInfo.state }}</div>
+                                  <div>{{ universityInfo.district }}</div>
+                                  <div class="headline pt-2 pb-2" style="color:#03A9F4">地址</div>
+                                  <div>{{ universityInfo.street ? universityInfo.street : '暂无数据' }}</div>
+                                  <div class="headline pt-2 pb-2" style="color:#03A9F4">网址</div>
+                                  <div><a target="_black" v-if="universityInfo.website" :href="'http://'+universityInfo.website">{{ universityInfo.website }}</a></div>
+                                  <!-- <div><a target="_black" :href="'http://'+universityInfo.website">{{ universityInfo.website ? universityInfo.website : '暂无数据'}}</a></div> -->
+                                  <div v-if="!universityInfo.website">暂无数据</div>
+                              </div>
+                          </v-card-title>
+                          <v-card-actions>
+                              <v-btn color="info" @click="changeShowUniversity">返回列表</v-btn>
+                          </v-card-actions>
+                      </v-card>
+                  </v-flex>
+              </v-layout>
+              <div style="display:flex;justify-content:center;margin:15px 0">
+                  <v-btn @click="searchCollage" color="primary">搜索</v-btn>
+              </div>
+          </div>
+      </div>
+  </div>
+  <div class="introduce-item clearfix">
+      <div class="pte-Contrast" name="vs" id="vs">
+      <div class="exam_vs pte-contrast-shadow">
+          <div class="wrap">
+              <p class="pte-title-bold"><b>PTE与IELTS、TOEFL对比</b></p>
+              <div class="p-content">
+                  <table class="exam table">
+                      <thead>
+                      <tr>
+                          <td>项目</td>
+                          <td>PTE</td>
+                          <td>IELTS</td>
+                          <td>TOEFL</td>
+                      </tr>
+                      </thead>
+                      <tbody>
+                        <tr v-for="item in tableInfo">
+                            <td>考试形式</td>
+                            <td>机考</td>
+                            <td>纸笔考试</td>
+                            <td>机考</td>
+                        </tr>
+                        <tr v-for="item in tableInfo">
+                            <td>考试日期</td>
+                            <td>随时报考，最快提前24小时可报名</td>
+                            <td>固定日期</td>
+                            <td>固定日期</td>
+                        </tr>
+                        <tr v-for="item in tableInfo">
+                            <td>考试时长</td>
+                            <td>一次3小时</td>
+                            <td>笔试2小时40分钟，口试14分钟</td>
+                            <td>一次4.5小时</td>
+                        </tr>
+                        <tr v-for="item in tableInfo">
+                            <td>考试费用</td>
+                            <td>275美金</td>
+                            <td>1960人民币</td>
+                            <td>1761人民币</td>
+                        </tr>
+                        <tr v-for="item in tableInfo">
+                            <td>收到成绩单</td>
+                            <td>最短1日，最长5日在线查收成绩单</td>
+                            <td>考后15天在线查询</td>
+                            <td>考后15天在线查询</td>
+                        </tr>
+                        <tr v-for="item in tableInfo">
+                            <td>收到纸质成绩单时间</td>
+                            <td>约3周收到成绩单</td>
+                            <td>6-8周</td>
+                            <td>6-8周</td>
+                        </tr>
+                        <tr v-for="item in tableInfo">
+                            <td>发送成绩单到院校</td>
+                            <td>在线发送成绩单：发送后24小时内院校即可收到</td>
+                            <td>考后13天开始邮寄成绩单到申请院校</td>
+                            <td>考后10天开始邮寄成绩单到申请院校</td>
+                        </tr>
+                        <tr v-for="item in tableInfo">
+                            <td>免费发送成绩单数量</td>
+                            <td>不限量</td>
+                            <td>5份成绩单</td>
+                            <td>4份成绩单</td>
+                        </tr>
+                        <tr v-for="item in tableInfo">
+                            <td>额外成绩单费用</td>
+                            <td>免费</td>
+                            <td>每份成绩单60元</td>
+                            <td>每份成绩单134元</td>
+                        </tr>
+                        <tr v-for="item in tableInfo">
+                            <td>考试评分</td>
+                            <td>全自动机器评分</td>
+                            <td>人工评分</td>
+                            <td>阅读和听力由机器评分，口语和写作由人工评分</td>
+                        </tr>
+                      </tbody>
+                  </table>
+              </div>
+          </div>
+      </div>
+      </div>
+  </div>
+  <div class="introduce-item clearfix why_pte">
+      <div class="why-pte">
+          <p class="pte-title-bold"><b>为何要选择PTE考试</b></p>
+          <div class="container-fluid wrap">
+                <div class="row">
+                    <div class="col-md-7">
+                        <div class="why-pte-left">
+                            <p class="why-pte-approval">全球广泛认可</p>
+                            <p class="why-pte-approval-info">目前获得超过3000多个项目和机构的认可，分布在包括英国，美国，加拿大，澳大利亚，爱尔兰等多个国家。其中澳洲全部大学，英国越98%的大学均认可PTE成绩。并可用于澳洲及英国的全部签证类型。</p>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="why-pte-right">
+                            <p class="why-te-bar"></p>
+                            <div class="why-pte-grid">
+                                <p class="why-pte-topic"><span class="why-pte-circular"></span>考试容易突破</p>
+                                <p class="why-pte-content">PTE的阅读写作部分相比于雅思来简单许多，对于口语听力比较好但是写作却得不到高分的考生来说非常有利；对于有移民需求但是迟迟没有达到雅思成绩需求的申请人来说，PTE比雅思更容易满足移民的语言要求。</p>
+                            </div>
+                            <div class="why-pte-grid">
+                                <p class="why-pte-topic"><span class="why-pte-circular"></span>出分时间很快</p>
+                                <p class="why-pte-content">PTE一般会在考试后5天之内出成绩，对考试成绩要求比较急的考生来说，PTE是不错的选择。</p>
+                            </div>
+                            <div class="why-pte-grid">
+                                <p class="why-pte-topic"><span class="why-pte-circular"></span>成绩无限制发送</p>
+                                <p class="why-pte-content">不限次数发送成绩到你选择的大学院校，没有任何附加费用，并且不需要在考试前确定所发送成绩的院校</p>
+                            </div>
+                            <div class="why-pte-grid">
+                                <p class="why-pte-topic"><span class="why-pte-circular"></span>考试时间灵活</p>
+                                <p class="why-pte-content">每个考点一般有三个时间可以供考生选择：9 : 00  12 : 00  16 : 00</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+              </div>
+      </div>
+  </div>
+  <div class="introduce-item clearfix" style="display:flex;justify-content:center;align-items:center;">
+      <div class="score_vs">
+          <div class="wrap">
+              <!-- <img src="//images.koolearn.com/shark/project/zt/2016/1228pte/i/compare.png?eb021a" style="display:block;margin:0 auto;"> -->
+          </div>
+      </div>
+  </div>
+  <div class="introduce-item clearfix">
+      <div class="pte-Contrast" name="vs" id="vs">
+          <div class="exam_vs">
+              <div class="wrap">
+                  <p class="pte-title-bold"><b>课程设置</b></p>
+                  <div class="p-content">
+                      <table class="exam table">
+                        <colgroup>
+                            <col width="14%">
+                            <col width="12%">
+                            <col width="10%">
+                            <col width="28%">
+                            <col width="20%">
+                            <col width="12%">
+                        </colgroup>                          
+                          <thead class="pte-course-head">
+                          <tr>
+                              <td></td>
+                              <td>课程形式</td>
+                              <td>课程时间</td>
+                              <td>学员水平</td>
+                              <td>学生目标</td>
+                          </tr>
+                          </thead>
+                          <tbody class="meiqia-dig">
+                            <tr>
+                                <td>精品1对1</td>
+                                <td>1对1</td>
+                                <td>灵活</td>
+                                <td>有一定了解</td>
+                                <td>需要个人定制化的加分方案</td>
+                            </tr>
+                            <tr>
+                                <td>79分高阶班</td>
+                                <td>小班直播</td>
+                                <td>固定</td>
+                                <td>已经通过65;已经上过课但依旧考不过79的同学</td>
+                                <td>需要考79分以上的同学</td>
+                            </tr>
+                            <tr>
+                                <td>读写集训课</td>
+                                <td>小班直播</td>
+                                <td>固定</td>
+                                <td>阅读写作分数遇到瓶颈;做题时间不足;不会速读;写作小分偏低</td>
+                                <td>阅读写作分数得到显著提高</td>
+                            </tr>
+                            <tr>
+                                <td>口语集训课</td>
+                                <td>小班直播</td>
+                                <td>固定</td>
+                                <td>口语分数遇到瓶颈;虽经大量练习,但发音分数难以提升;口语分数突然骤降的同学.</td>
+                                <td>口语分数得到显著提高</td>
+                            </tr>
+                            <tr>
+                                <td>翻转课堂班</td>
+                                <td>小班直播</td>
+                                <td>灵活</td>
+                                <td>刚接触PTE或已考过PTE但成绩不理性的同学;想短期提分的同学；</td>
+                                <td>短期提明显</td>
+                            </tr>
+                            <tr>
+                                <td>全项保过班</td>
+                                <td>小班直播</td>
+                                <td>固定</td>
+                                <td>刚了解PTE的同学;</td>
+                                <td>需要四项全面提升的同学；考不过想免费再听一次的同学。</td>
+                            </tr>
+                            <tr>
+                                <td>听力集训课</td>
+                                <td>小班直播</td>
+                                <td>固定</td>
+                                <td>听力分数遇到瓶颈；不会抓听力音频重点；不会迅速记笔记；缺少听力答题技巧的同学;</td>
+                                <td>听力分数得到显著提高</td>
+                            </tr>
+                            <tr>
+                                <td>精准押题课</td>
+                                <td>小班直播</td>
+                                <td>固定</td>
+                                <td>马上就要考试 还没来得及看所有机经的同学；想考前冲刺提高的同学；快要考试 仍然对PTE迷茫的同学;</td>
+                                <td>精准预测试题，高效备考</td>
+                            </tr>
+                            <tr>
+                                <td>线下班</td>
+                                <td>线下课堂</td>
+                                <td>固定</td>
+                                <td>刚接触PTE，需要听说读写四项技巧和训练考试成绩离自己目标分数相差较远的学生想系统的学习下PTE的学生</td>
+                                <td>全面提高各项pte水平</td>
+                            </tr>
+                            <tr>
+                                <td>初级技巧班</td>
+                                <td>线上课堂</td>
+                                <td>固定</td>
+                                <td>刚接触PTE，需要学习听说读写四项技巧</td>
+                                <td>基础能力迅速提高</td>
+                            </tr>
+                          </tbody>
+                      </table>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+  <div class="introduce-item clearfix" style="background-color:#ffffff;">
+      <p class="pte-title-bold"><b>上月明星导师</b></p>
+
+
+
+
+
+
+
+      <div class="container-fluid">
+          <div class="row wrap">
+              <div class="col-md-3">
+                <div style="position: relative;margin-bottom: 65px;height: 250px;">
+                    <div class="abdivstyle">
+                        <div class="w120-img"><img src="./static/images/teacher1.jpg" class="img-w100"></div>
+                        <p class="ceo-name">Abby</p>
+                        <p class="line-bottom"></p>
+                        <p class="job-detail">听力班</p>
+                        <p class="job-email">哈尔滨工业大学硕士</p>
+                        <div class="detail-descript hid" style="display: none;">
+                        <p class="detail-more pdt8">常年在欧洲生活，精通英语和法语。在语言方面有自己独到的见解，尤其擅长英语听力和阅读教学。教学风格深入浅出，潜移默化，学员经常在不自觉的情况下发现自己的语言能力得到了提升，其擅长的技巧——“逻辑分析大法”已经在无数考试验证中取得成效。</p>
+                        </div>
+                    </div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div style="position: relative;margin-bottom: 65px;height: 250px;">
+                    <div class="abdivstyle">
+                        <div class="w120-img"><img src="./static/images/teacher2.jpg" class="img-w100"></div>
+                        <p class="ceo-name">Angela</p>
+                        <p class="line-bottom"></p>
+                        <p class="job-detail">精品一对一</p>
+                        <p class="job-email">麦考瑞大学会计硕士</p>
+                        <div class="detail-descript hid" style="display: none;">
+                        <p class="detail-more pdt8">留澳六年，PTE黑科技口语小公举，PTE满分选手，雅托全能教师，跟PTE打交道的时间非常长，见证考试发展，熟悉技巧和题库，经常指导身边的同学们炸炸炸，享受教学，经验丰富，教学风格逻辑清晰，温柔耐心，深受同学喜爱。</p>
+                        </div>
+                    </div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div style="position: relative;margin-bottom: 65px;height: 250px;">
+                    <div class="abdivstyle">
+                        <div class="w120-img"><img src="./static/images/teacher3.jpg" class="img-w100"></div>
+                        <p class="ceo-name">Linda</p>
+                        <p class="line-bottom"></p>
+                        <p class="job-detail">精品一对一</p>
+                        <p class="job-email">悉尼大学硕士</p>
+                        <div class="detail-descript hid" style="display: none;">
+                        <p class="detail-more pdt8">'Speaking大满贯，留澳多年，有丰富的一线教学经验，扎实的英语学科基础让Linda老师能够轻松洞察出题人逻辑，从而驾驭PTE各种做题技巧，有听说读写全方位的教学实力和绝佳的时间管理能力，可以根据同学的实际情况制定备考计划并高效执行，对同学来说，每次上她的课都能有效解决难题，从而取得突破。</p>
+                        </div>
+                    </div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div style="position: relative;margin-bottom: 65px;height: 250px;">
+                    <div class="abdivstyle">
+                        <div class="w120-img"><img src="./static/images/teacher4.jpg" class="img-w100"></div>
+                        <p class="ceo-name">Renee</p>
+                        <p class="line-bottom"></p>
+                        <p class="job-detail">精品一对一</p>
+                        <p class="job-email">新南威尔士大学研究生毕业</p>
+                        <div class="detail-descript hid" style="display: none;">
+                        <p class="detail-more pdt8">黑科技一对一明星老师，口语最为擅长，英语沟通和交流能力一级棒。性格活泼，循循善诱，亲切与威严并重。教学风格多变，擅长1~3月内大幅度提升学员分数，受到好评不断，被同学们亲切的称为“口语小公举”。</p>
+                        </div>
+                    </div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div style="position: relative;margin-bottom: 65px;height: 250px;">
+                    <div class="abdivstyle">
+                        <div class="w120-img"><img src="./static/images/teacher5.jpg" class="img-w100"></div>
+                        <p class="ceo-name">Annie</p>
+                        <p class="line-bottom"></p>
+                        <p class="job-detail">写作班</p>
+                        <p class="job-email">悉尼大学毕业</p>
+                        <div class="detail-descript hid" style="display: none;">
+                        <p class="detail-more pdt8">PTE口语写作双满分，深谙口语提分技巧，熟悉写作的套路和规则，对审题、模板和诀窍有自己独特的理解，始终将PTE教学看作自己的爱好和事业，喜欢钻研新题，教学中有股“不服输”的态度。教学风格多元，专治备考疑难杂症，并经常指导同学拿高分，很多同学上完Annie老师的写作课都高呼：“以前的作文都白写了。”</p>
+                        </div>
+                    </div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div style="position: relative;margin-bottom: 65px;height: 250px;">
+                    <div class="abdivstyle">
+                        <div class="w120-img"><img src="./static/images/teacher6.jpg" class="img-w100"></div>
+                        <p class="ceo-name">Fiona</p>
+                        <p class="line-bottom"></p>
+                        <p class="job-detail">听力班</p>
+                        <p class="job-email">墨尔本大学硕士</p>
+                        <div class="detail-descript hid" style="display: none;">
+                        <p class="detail-more pdt8">PTE四门90分，口语听力王牌讲师，有澳洲多年一线英语教学经验，擅长短期迅速提分，曾创下黑科技短期提分最佳记录。教学风格灵活多变，直击要害，具备在短时间内有效传达知识并带动课堂氛围的能力，技巧实用性强，被考生称为“考点指南”。</p>
+                        </div>
+                    </div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div style="position: relative;margin-bottom: 65px;height: 250px;">
+                    <div class="abdivstyle">
+                        <div class="w120-img"><img src="./static/images/teacher7.jpg" class="img-w100"></div>
+                        <p class="ceo-name">Lillian</p>
+                        <p class="line-bottom"></p>
+                        <p class="job-detail">精品一对一</p>
+                        <p class="job-email">墨尔本大学硕士</p>
+                        <div class="detail-descript hid" style="display: none;">
+                        <p class="detail-more pdt8">PTE黑科技全能教头，擅长听说读写全科，六年一线语言学术考试教学经验，专攻澳洲PTE。教学风格生动有趣，分析考试问题一针见血，经常能一语中的并帮助学员各个击破问题所在。常年活跃在教学与考试的第一线，经常考试判断PTE命题趋势的她既是好学生，又是好老师。</p>
+                        </div>
+                    </div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div style="position: relative;margin-bottom: 65px;height: 250px;">
+                    <div class="abdivstyle">
+                        <div class="w120-img"><img src="./static/images/teacher8.jpg" class="img-w100"></div>
+                        <p class="ceo-name">Queena</p>
+                        <p class="line-bottom"></p>
+                        <p class="job-detail">全项班</p>
+                        <p class="job-email">莫纳什大学教育学硕士</p>
+                        <div class="detail-descript hid" style="display: none;">
+                        <p class="detail-more pdt8">拥有维多利亚州的教师证，博士在读，PTE满分选手，多年雅思及PTE教学经验，能够准确迅速的记忆学生水平，提出不同的指导建议。不仅是老师，更像一个小姐姐，性格活泼，是学生们的良师益友。带领过的学生三周内由原先四个65的成绩突破了四个79，学员成绩提升快。</p>
+                        </div>
+                    </div>
+                </div>
+              </div>
+          </div>
+        </div>
+  </div>
+  <div class="introduce-item clearfix">
+      <p class="pte-title-bold"><b>学生分享</b></p>
+
+
+
+
+
+
+<div class="container-fluid wrap" id="pte_study_info_share">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="study-info-grid">
+                <div class="transition_study_info" style="background-image:url('./static/images/study-one.jpg')">
+                    <div class="pte-drap" style="background-color:rgba(131, 105, 49, 0.5)"></div>
+                    <div class="x-pic-pte"></div>
+                    <div class="pte-drap-bottom"></div>
+                    <div class="study-info-name"><span>小笛子</span></div>
+                    <div class="study-info-classTeach"><span>授课老师：牙牙&Fiona&Brenda&Marie</span><span>PTE黑科技押题班&听力班&口语班</span></div>
+                    <!-- <div class="study-info-btn">查看详情</div> -->
+                </div>
+                <div class="study-info-content"><a href="https://mp.weixin.qq.com/s?__biz=MzUzNTAwMjkxNg==&mid=100003789&idx=1&sn=f42b0bf5fdeb42e0b34d202f3093f312&chksm=7a8d65864dfaec90f2161ba316f06c2de03dc9a16cf957826359e6083f0422b1a4876282d8d0#rd">先说下我的pte复习之路，我是在一月份开始正式准备的pte，后来上了押题班，3月份第一次考了7炸，过了两周发现要8炸，又开始接着复习，考了一次发现不行，就报了黑科技Brenda的口语班，第三次考口语过了8但是听力还是差一些，就又报了Marie老师的听力班。总的来说，复习pte的路真的很艰难，真的很容易放弃，要需要及时找老师来发现自己的不足，我第三次考完已经快要放弃了，但是上了Marie老师的课后发现自己之前的学习真的是有点没有重点。'</a></div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="study-info-grid">
+                <div class="transition_study_info" style="background-image:url('./static/images/study-fore.jpg')">
+                    <div class="pte-drap" style="background-color:rgba(132, 153, 231, 0.5)"></div>
+                    <div class="x-pic-pte"></div>
+                    <div class="pte-drap-bottom"></div>
+                    <div class="study-info-name"><span>Pan</span></div>
+                    <div class="study-info-classTeach"><span>授课老师：牙牙&Fiona</span><span>PTE黑科技押题班</span></div>
+                    <!-- <div class="study-info-btn">查看详情</div> -->
+                </div>
+                <div class="study-info-content"><a href="https://mp.weixin.qq.com/s/jYZImVxS5t6llNrPLMBylg">总而言之，练习、技巧、机经、模版这几样都是突破79分不可或缺的手段。考试前一天过一遍考试流程，或者用黑科技平台模拟考一次，找找感觉。考试时也不要因为前面一部分失误而影响到后面的发挥，要想着后面发挥得好是可以弥补不足的。最后心态要调整好，毕竟谋事在人，成事在天，自己尽力了就好。没过的话要先理性分析原因，下次好好准备再战，不要太沮丧或者太着急报下一场，毕竟大家或多或少都被PTE伤过，没经历过失败怎能够称作完美呢。</a></div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="study-info-grid">
+                <div class="transition_study_info" style="background-image:url('./static/images/study-three.jpg')">
+                    <div class="pte-drap" style="background-color:rgba(174, 133, 202, 0.5)"></div>
+                    <div class="x-pic-pte"></div>
+                    <div class="pte-drap-bottom"></div>
+                    <div class="study-info-name"><span>紫心</span></div>
+                    <div class="study-info-classTeach"><span>授课老师：Martin老师</span><span>PTE黑科技1对VIP课程</span></div>
+                    <!-- <div class="study-info-btn">查看详情</div> -->
+                </div>
+                <div class="study-info-content"><a href="https://mp.weixin.qq.com/s?__biz=MzUzNTAwMjkxNg==&mid=100003620&idx=1&sn=9edc1e836e8d5ad3efe31f01f8992970&chksm=7a8d656f4dfaec792eb34e94d242bbd5d09c62c7b3849e34cf70683713b3990d085549e26d51#rd">我想先说下心态我想先说下心态，真的很重要。别放弃，坚持就是胜利。我基础很差出国时候雅思5.5分，口语万年5分（雅思我考了很多次），不准备考了，来读语言班入学，快毕业时候又考过一次… 总分6分口语还是5分，说来实在惭愧。然后才知道pte考试，虽然大家说口语听力不好的不适合pte，但是我觉得还是得看自己的实力。比如我雅思口语差因为说中文我都不知道要说什么，不是一个健谈的人。</a></div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="study-info-grid">
+                <div class="transition_study_info" style="background-image:url('./static/images/study-two.jpg')">
+                    <div class="pte-drap" style="background-color:rgba(242, 132, 158, 0.5)"></div>
+                    <div class="x-pic-pte"></div>
+                    <div class="pte-drap-bottom"></div>
+                    <div class="study-info-name"><span>樱灿</span></div>
+                    <div class="study-info-classTeach"><span>授课老师：Abby老师</span><span>PTE黑科技听力集训营</span></div>
+                    <!-- <div class="study-info-btn">查看详情</div> -->
+                </div>
+                <div class="study-info-content"><a href="https://mp.weixin.qq.com/s?__biz=MzUzNTAwMjkxNg==&mid=100003563&idx=1&sn=b47a1a2258a792b5feebcce95d87a9ce&chksm=7a8d64a04dfaedb6363d134765bba8fb39060fcea5a456881bef03dda2828943e47f440e052a#rd">总的来说，这次考pte的心路历程，就是对自己不满意，离当初设定的目标相隔了半年，谁都不怪，只怪自己平时玩心重又懒又贪睡，但又要感谢自己，因为即使这样，即使厌恶了自己很多次，但也没有放弃，坚持到你炸的那天，一切都值。（偷偷告诉你，平时一大爱好就是看大班长发的大神们的八炸经验分享，其中肯定有对你路子的建议和方法，觉得班长这一趴做的特别好）</a></div>
+            </div>
+        </div>    
+    </div>
+</div>
+        
+
+
+<!-- 
+
+      <v-layout row wrap id="pte_study_info_share">
+          <v-flex v-for="(item,index) in studyInfo" :key="`6${index}`" xs12 sm6>
+              <v-card class="elevation-0" style="background-color:#fafafa;">
+                  <v-card-text class="px-6">
+                      <div class="study-info-grid">
+                          <div class="transition_study_info" :style="{'background-image':'url('+item.picUrl+')'}">
+                              <div class="pte-drap" :style="{'background-color':''+item.bk+''}"></div>
+                              <div class="x-pic-pte"></div>
+                              <div class="pte-drap-bottom"></div>
+                              <div class="study-info-name"><span>{{ item.name }}</span></div>
+                              <div class="study-info-classTeach"><span>{{ item.lectureTeach }}</span><span>{{ item.courseName }}</span></div>
+                          </div>
+                          <div class="study-info-content"><a :href="item.href">{{ item.nameContent }}</a></div>
+                      </div>
+                  </v-card-text>
+              </v-card>
+          </v-flex>
+      </v-layout> -->
+  </div>
+</section>
+
+<section class="propaganda">
+  <div class="container">
+      <div class="propaganda-content">
+          <h3 class="propaganda-title">
+              关注PTE，更关注学习的你
+          </h3>
+          <p class="propaganda-slogan">
+              考生的成长是我们的唯一目标，在学习PTE的所有场景之中，我们都会提供不同的帮助，助力考生提高学习效率，授人以鱼不如授人以渔！
+          </p>
+          <div class="free-use-btn btn-white loginWebSite">
+               开始练习
+          </div>
+      </div>
+  </div>
+  <div class="propaganda-img">
+  </div>
+</section>
+
+
+<section class="security">
+  <h3 class="security-title">
+      让科技真正服务于学习
+  </h3>
+  <ul class="security-list clearfix">
+      <li class="security-item-wrap">
+          <div class="security-item">
+              <div class="symbol"><i class="ico-security ico-security-1"></i></div>
+              <div class="summary">
+                  智能纠音
+              </div>
+              <p class="detail">
+                  系统自动检查考生发音问题，可视化的波形图让考生对自身的语言能力清楚认知
+              </p>
+          </div>
+      </li>
+      <li class="security-item-wrap">
+          <div class="security-item">
+              <div class="symbol"><i class="ico-security ico-security-2"></i></div>
+              <div class="summary">
+                  统计分析
+              </div>
+              <p class="detail">
+                  系统统计考生的应用数据，并对数据结果和全体数据结果进行对比，实时更新考生能力水平
+              </p>
+          </div>
+      </li>
+      <li class="security-item-wrap">
+          <div class="security-item">
+              <div class="symbol"><i class="ico-security ico-security-3"></i></div>
+              <div class="summary">
+                  课程规划
+              </div>
+              <p class="detail">
+                  系统可以给出考生需要报考的课程和需要学习的任内容，将课程与能力相互结合
+              </p>
+          </div>
+      </li>
+      <li class="security-item-wrap">
+          <div class="security-item">
+              <div class="symbol"><i class="ico-security ico-security-4"></i></div>
+              <div class="summary">
+                  预测预警
+              </div>
+              <p class="detail">
+                  我们更看重考生的成长，当考生的数据发生下滑的时候，系统会及时给出预警和站内信通知，让考生保持清醒
+              </p>
+          </div>
+      </li>
+  </ul>
+</section>
+
+
+<section class="client">
+  <h3 class="client-title">
+      20万考生的首选工具，前所未有的效率提升
+  </h3>
+  <p class="client-intro">
+      我们的考生遍布澳洲和国内，<strong>北京</strong>、<strong>上海</strong>、<strong>广州</strong>、<strong>西安</strong>、<strong>悉尼</strong>、<strong>墨尔本</strong>、<strong>堪培拉</strong>都有我们的身影，机经团的小伙伴们等待你的加入，一起来体验前所未有的效率提升。
+  </p>
+  <div class="free-use-btn btn-blue loginWebSite">
+      立即体验
+  </div>
+  <div class="job-wrap">
+      <div class="job"></div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+      <!-- <div class="row">
+          <img src="/static/./static/images/new_home/footer_logo.png" class="logo footer-logo">
+      </div> -->
+      <div class="row">
+          <div class="col-md-6">
+              <ul class="footer-nav-container">
+                  <router-link to="/">
+                      <li><a class="container-intro">首页</a><i class="disc"></i></li>
+                  </router-link>
+                  <router-link to="/CaseOperate">
+                      <li><a class="container-intro">课程&会员</a><i class="disc"></i></li>
+                  </router-link>
+                  <router-link to="/Member">
+                      <li><a class="container-intro">用户案例</a><i class="disc"></i></li>
+                  </router-link>
+                  <!-- icp临时取消 -->
+                  <!-- <router-link to="/InstructionalVideo">
+                      <li><a class="container-intro">教学视频</a><i class="disc"></i></li>
+                  </router-link>
+                  <router-link to="/Portal">
+                      <li><a class="container-intro">用户社区</a><i class="disc"></i></li>
+                  </router-link> -->
+                  <router-link to="/AboutUs">
+                      <li class="container-intro">公司简介<i class="disc"></i></li>
+                  </router-link>
+                  <li id="showPCall">联系我们</li>
+              </ul>
+              <ul class="contact-container footer-mesg">
+                  <li><i class="ico ico-address"></i>深圳市南山区南山街道南海大道西桂庙路北阳光华艺大厦1栋4F、4G-20</li>
+                  <li><a href="https://www.zhihu.com/org/ptehei-ke-ji/posts"><i class="ico ico-zhihu"></i>黑科技PTE</a></li>
+                  <li><i class="ico ico-phone"></i>400-101-9155</li>
+                  <li><a id="email_contact" href="mailto:info@ikk.ai"><i class="ico ico-email"></i>info@ikk.ai</a></li>
+                  <!-- <li><i class="ico ico-qq"></i>2543360559</li> -->
+              </ul>
+              <p class="copyright">收款人邮箱：948674232@qq.com，zhaot90@gmail.com</p>
+              <p class="copyright">Copyright 2017 - 2018 粤ICP备18023850号 ikk. All Rights Reserved.<span>深圳市科科智能科技有限公司 版权所有</span></p>
+          </div>
+          <div class="col-md-2 footer-code">
+              <p class="code-name">PTE微信公众号</p>
+              <img src="./static/images/unified-baidu-statistics.jpg" width="100px">
+              <p class="code-info">更多PTE热门资讯</p>
+          </div>
+          <div class="col-md-2 footer-code">
+              <p class="code-name">PTE小程序</p>
+              <img src="./static/images/offical_weichat_1a0871c.jpg" width="100px">
+              <p class="code-info">扫TA随时开始学习</p>
+          </div>
+          <div class="col-md-2 footer-code">
+              <p class="code-name">客服二维码</p>
+              <img src="./static/images/unified-baidu-statistics.jpg" width="100px">
+              <p class="code-info">咨询更多问题</p>
+          </div>
+      </div>
+  </div>
+</footer>
+</div>
+</div>
+
+  <!-- 当前是stg环境所以询问用户是否继续访问 -->
+  <Dialog
+   :dialogContent = 'dialogContent'
+   :isShowDialog = 'isShowChooseWebsite'
+   @sure = "sureExport"
+   @cancel = "cancelExport"></Dialog>
+
+  <!-- 写一个不可被关闭的弹窗让用户去访问正式网站 -->
+  <v-dialog
+    v-model="isIntoFormalWebsite"
+    width="500"
+  >
+    <v-card>
+      <v-card-title
+        class="headline grey lighten-2"
+        primary-title
+      >
+        您没有访问该网站的权限
+      </v-card-title>
+
+      <v-card-text>
+        <div style="font-size:16px;">
+            <p>请访问PTE黑科技正式网站</p><span class="pr-2">国内用户:</span><a style="color:#0CA3F4" href="https://pte-ai.com" target="_blank">https://pte-ai.com</a></br><span class="pr-2">澳洲用户:</span><a style="color:#0CA3F4" href="https://pte.ai" target="_blank">https://pte.ai.com</a>
+        </div>
+      </v-card-text>
+
+      <v-divider></v-divider>
+
+      <v-card-actions>
+        <v-spacer></v-spacer>
+        <v-btn
+          color="primary"
+          flat
+          @click="isIntoFormalWebsite = false"
+        >
+          继续游览
+        </v-btn>
+      </v-card-actions>
+    </v-card>
+  </v-dialog>
+</body>
+</html>
+

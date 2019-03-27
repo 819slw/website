@@ -1,0 +1,466 @@
+<template>
+<div id="login_home" :class="{'show-tengxun-video':isShowVideo}">
+  <div class="instructional-video" style="position:relative">
+
+<div class="warn-box">
+    <div class="warn-word">敬请期待！</div>
+</div>
+
+<div id="tengxun-video" v-show="isShowVideo" @click.stop="closeTencent">
+    <!-- <i class="material-icons close-tengxun" @click="closeTencent">close</i> -->
+    <div id="video-container" @click.stop=""></div>
+</div>
+
+
+<nav class="navbar clearfix J-nav">
+    <div class="container">
+        <div class="navbar-header">
+            <i class="ico-list navbar-toggle collapsed cursor"></i>
+            <a class="navbar-logo" href="">
+            </a>
+        </div>
+        <div class="navbar-collapse nav-hide" id="J-navbar-collapse">
+            <!-- <i class="ico-close navbar-toggle close-toggle"></i> -->
+            <i class="material-icons icon navbar-toggle close-toggle cursor">close</i>
+            <ul class="navbar-nav nav-list navbar-left">
+                <router-link to="/">
+                    <li class="nav-list-item" id="home_page"><a>首页</a></li>
+                </router-link>
+                <router-link to="/CaseOperate">
+                    <li class="nav-list-item" id="case_page"><a>课程&会员</a></li>
+                </router-link>
+                 <!-- 因为bdp做的是当游览器宽度小于992的时候 隐藏用户案例 和教学视频所以这里删除id名称 member_info  instructional_video -->
+                 <!-- 并将767宽度兼容 改为840 -->
+                <router-link to="/Member">
+                    <li class="nav-list-item" id=""><a>用户案例</a></li>
+                </router-link>
+                <router-link to="/InstructionalVideo">
+                    <li class="nav-list-item active" id=""><a>教学视频</a></li>
+                </router-link>
+                <router-link to="/Portal">
+                    <li class="nav-list-item" id="about_page"><a>用户社区</a></li>
+                </router-link>
+                <!-- <router-link to="/AboutUs">
+                    <li class="nav-list-item" id=""><a>公司简介</a></li>
+                </router-link> -->
+            </ul>
+            <ul class="navbar-nav nav-button-group navbar-right">
+                <li class="nav-list-item">
+                    <button class="download-btn btn-animation follow-Public-number"><span>免费领取资料</span></button>
+                </li>
+                <li class="nav-list-item">
+                    <button class="download-btn btn-animation follow-Small-program"><span>PTE交流群</span></button>
+                </li>
+                <li class="nav-list-item J-register-btn">
+                    <a>
+                        <button class="signin-btn btn-animation btn-an-adverse" @click="loginWebSite()"><span>注册</span></button>
+                    </a>
+                </li>
+                <li class="nav-list-item J-login-btn">
+                    <a>
+                        <button class="signin-btn btn-animation btn-an-adverse " @click="loginWebSite()"><span>登录</span></button>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- 扫描二维码 -->
+<div class="erweima-download-modal-wrapper erweima-J-down-load-app" style="display: none;">
+    <div class="erweima-download-modal-bg"></div>
+    <div class="erweima-download-modal">
+        <div class="download-modal-header">
+            <div class="erweima-modal-close"></div>
+        </div>
+        <div class="download-modal-body">
+            <div class="download-title">扫描二维码 下载APP</div>
+            <div class="download-sub-title"></div>
+            <img class="download-code" src="/static/images/login_page/offical_weichat_1a0871c.jpg">
+        </div>
+    </div>
+</div>
+
+   <!-- //登陆弹出框 -->
+<div class="login-download-modal-wrapper login-J-down-load-app" id="login_box">
+    <div class="login-download-modal-bg" @click="closeRequest()"></div>
+    <div class="login-download-modal login-grid">
+      <img class="grid-top-pic" src="/static/images/login_page/loginBoxTop.png" style="max-width: 100%">
+      <div class="top-word">
+        <p class="brand-intro-font">PTE黑科技在线学习平台</p>
+        <p class="brand-edition-font">Ver 1.15.0版本</p>
+      </div>
+      <div class="login-content">
+        <img class="erweima" src="/static/images/login_page/load.gif" />
+        <div style="font-size:14px;color:red;max-width:60%" v-if="isShowLoginState">{{ loginState }}</div>
+        <p class="login-font-style">请使用微信扫描二维码登录</p>
+        <p class="login-font-style">“PTE黑科技”</p>
+        <button class="solve" v-if="isShowSolveBtn" @click="solveExtent">已解决？点击刷新</button>
+      </div>
+    </div>
+</div>
+
+    <section class="banner video-banner J-scorll-top">
+        <h5 class="banner-title">精通使用黑科技PTE</h5>
+        <p class="banner-slogan">快速学会使用黑科技PTE，你就是学习达人</p>
+    </section>
+    <section class="video-wrap container">
+        <div class="video-pannel">
+            <div class="pannel-header">
+                <ul class="category-list J-category-list">
+                    <!-- <li class="category-item Developmenting">
+                        1adfasdf
+                    </li>
+                    <li class="category-item Developmenting">
+                        热门视频
+                    </li> -->
+                    <li class="category-item active Developmenting" data-type="popular">题型讲解</li>
+                    <!-- <li class="category-item Developmenting" data-type="datasource">练习使用</li>
+                    <li class="category-item Developmenting" data-type="worksheet">模考使用</li>    
+                    <li class="category-item Developmenting" data-type="dashboard">可视化分析</li>
+                    <li class="category-item Developmenting" data-type="chart">学习计划</li>
+                    <li class="category-item Developmenting" data-type="sceneTutorial">特定场景</li> -->
+                </ul>
+            </div>
+            <div class="pannel-body">
+                <ul class="video-list clearfix J-video-list">
+                    <li class="video-item Developmenting" v-for="(item,index) in tencentVideoSrc" @click="openTencent(item)">
+                        <div class="video-mask" :style="{backgroundImage: 'url(' + item.coverSmallpic + ')'}">
+                            <p class="video-title"></p>
+                            <p class="video-slogan"></p>
+                            <div class="video-duration"></div>
+                        </div>
+                        <div class="video-mask-hover">
+                            <i class="ico-video"></i>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <section class="contact">
+        <p>若上述视频还没解决你的问题，快来告诉我们！<a class="contact-btn J-contact-btn" style="color:#5182E4" id="showPCall">联系我们</a></p>
+    </section>
+    <div class="download-modal-wrapper J-contact-dialog" style="display: none;">
+        <div class="download-modal-bg"></div>
+        <div class="download-modal">
+            <div class="download-modal-header">
+                <div class="modal-close"></div>
+            </div>
+            <div class="download-modal-body">
+                <div class="download-title">联系我们</div>
+                <p class="download-slogan">问题还没解决？快扫一扫告诉我，说不定你的问题会变成视频哦</p>
+                <img class="download-code" src="/static/images/login_page/offical_weichat_1a0871c.jpg">
+            </div>
+        </div>
+    </div>
+
+
+
+<footer>
+    <div class="container">
+        <!-- <div class="row">
+            <img src="/static//static/images/login_page/new_home/footer_logo.png" class="logo footer-logo">
+        </div> -->
+        <div class="row">
+            <div class="col-md-8">
+                <ul class="footer-nav-container">
+                    <router-link to="/">
+                        <li><a class="container-intro">首页</a><i class="disc"></i></li>
+                    </router-link>
+                    <router-link to="/CaseOperate">
+                        <li><a class="container-intro">课程&会员</a><i class="disc"></i></li>
+                    </router-link>
+                    <router-link to="/Member">
+                        <li><a class="container-intro">用户案例</a><i class="disc"></i></li>
+                    </router-link>
+                    <router-link to="/InstructionalVideo">
+                        <li><a class="container-intro">教学视频</a><i class="disc"></i></li>
+                    </router-link>
+                    <router-link to="/Portal">
+                        <li><a class="container-intro">用户社区</a><i class="disc"></i></li>
+                    </router-link>
+                    <router-link to="/AboutUs">
+                        <li class="container-intro">公司简介<i class="disc"></i></li>
+                    </router-link>
+                    <li id="showPCall">联系我们</li>
+                </ul>
+                <ul class="contact-container footer-mesg">
+                    <li><i class="ico ico-address"></i>深圳市南山区南山街道南海大道西桂庙路北阳光华艺大厦1栋4F、4G-20</li>
+                    <li><a href="https://www.zhihu.com/org/ptehei-ke-ji/posts"><i class="ico ico-zhihu"></i>黑科技PTE</a></li>
+                    <li><i class="ico ico-phone"></i>400-101-9155</li>
+                    <li><a id="email_contact" href="mailto:info@ikk.ai"><i class="ico ico-email"></i>info@ikk.ai</a></li>
+                    <!-- <li><i class="ico ico-qq"></i>2543360559</li> -->
+                </ul>
+                <p class="copyright">Copyright 2017 - 2018 粤ICP备18023850号 ikk. All Rights Reserved.<span>深圳市科科智能科技有限公司 版权所有</span></p>
+            </div>
+            <div class="col-md-2 footer-code">
+                <p class="code-name">PTE微信公众号</p>
+                <img src="/static/images/login_page/unified-baidu-statistics.jpg" width="100px">
+                <p class="code-info">更多PTE热门资讯</p>
+            </div>
+            <div class="col-md-2 footer-code">
+                <p class="code-name">PTE小程序</p>
+                <img src="/static/images/login_page/offical_weichat_1a0871c.jpg" width="100px">
+                <p class="code-info">扫TA随时开始学习</p>
+            </div>
+            <div class="col-md-2 footer-code">
+                <p class="code-name">客服二维码</p>
+                <img src="/static/images/login_page/unified-baidu-statistics.jpg" width="100px">
+                <p class="code-info">咨询更多问题</p>
+            </div>
+        </div>
+    </div>
+</footer>
+  </div>
+  </div>
+</template>
+<script>
+var isShowLoginBox = false;
+import AV from 'leancloud-storage'
+  import {
+    LoginVerify
+  } from '@/api/user'
+import '../../assets/js/public.js'
+
+  /* eslint-disable */
+  export default {
+    data () {
+      return {
+          isShowLoginState:false,
+          loginState:'',
+          isShowSolveBtn:false,
+          isShowVideo:false,
+          nowVideoSrc:'',
+          tencentVideoSrc: [
+              {
+                  coverpic:'/static/images/login_page/cover_big_01.jpg',     //牙牙 机经 短视频
+                  coverSmallpic:'/static/images/login_page/cover_small_01.jpg',
+                  videoSrc:'http://1252908573.vod2.myqcloud.com/5b62a68cvodcq1252908573/0d44cf405285890783288876490/CLBZX6OCvWYA.mp4'
+              },
+              {
+                  coverpic:'/static/images/login_page/cover_big_02.jpg',   //Renee RA
+                  coverSmallpic:'/static/images/login_page/cover_small_02.jpg',
+                  videoSrc:'http://1252908573.vod2.myqcloud.com/5b62a68cvodcq1252908573/0d44cf225285890783288876483/8rYdX3H5DjwA.mp4'
+              },
+              {
+                  coverpic:'/static/images/login_page/cover_big_03.jpg',   //queena 阅读选择题
+                  coverSmallpic:'/static/images/login_page/cover_small_03.jpg',
+                  videoSrc:'http://1252908573.vod2.myqcloud.com/5b62a68cvodcq1252908573/0d44cf015285890783288876473/zHLEFtJILUoA.mp4'
+              },
+              {
+                  coverpic:'/static/images/login_page/cover_big_04.jpg',   //Nathan WE
+                  coverSmallpic:'/static/images/login_page/cover_small_04.jpg',
+                  videoSrc:'http://1252908573.vod2.myqcloud.com/5b62a68cvodcq1252908573/0d44cec25285890783288876456/9sjPhsDEHtwA.mp4'
+              },
+              {
+                  coverpic:'/static/images/login_page/cover_big_05.jpg',    //Marie SST
+                  coverSmallpic:'/static/images/login_page/cover_small_05.jpg',
+                  videoSrc:'http://1252908573.vod2.myqcloud.com/5b62a68cvodcq1252908573/0d32cbe75285890783288866984/XXgyaeyDts4A.mp4'
+              },
+              {
+                  coverpic:'/static/images/login_page/cover_big_06.jpg',    //Linda RO
+                  coverSmallpic:'/static/images/login_page/cover_small_06.jpg',
+                  videoSrc:'http://1252908573.vod2.myqcloud.com/5b62a68cvodcq1252908573/0d44cec05285890783288876454/cmcNikncCK8A.mp4'
+              },
+              {
+                  coverpic:'/static/images/login_page/cover_big_07.jpg',   //Lilian RS
+                  coverSmallpic:'/static/images/login_page/cover_small_07.jpg',
+                  videoSrc:'http://1252908573.vod2.myqcloud.com/5b62a68cvodcq1252908573/0d44ce9f5285890783288876444/jACdkOYUktQA.mp4'
+              },
+              {
+                  coverpic:'/static/images/login_page/cover_big_08.jpg',   //Hency DI
+                  coverSmallpic:'/static/images/login_page/cover_small_09.jpg',
+                  videoSrc:'http://1252908573.vod2.myqcloud.com/5b62a68cvodcq1252908573/0d44ce5d5285890783288876424/qho59kjCspAA.mp4'
+              },
+              {
+                  coverpic:'/static/images/login_page/cover_big_09.jpg',   //Fiona FIB_LW
+                  coverSmallpic:'/static/images/login_page/cover_small_08.jpg',
+                  videoSrc:'http://1252908573.vod2.myqcloud.com/5b62a68cvodcq1252908573/0d44ce3d5285890783288876415/3bILTaqXkA0A.mp4'
+              },
+              {
+                  coverpic:'/static/images/login_page/cover_big_10.jpg',   //Fiona FIB_R FIB_RW 
+                  coverSmallpic:'/static/images/login_page/cover_small_10.jpg',
+                  videoSrc:'http://1252908573.vod2.myqcloud.com/5b62a68cvodcq1252908573/0d44ce3c5285890783288876414/q7P5vVrNbPEA.mp4'
+              },
+              {
+                  coverpic:'/static/images/login_page/cover_big_11.jpg',  //Annie SWT
+                  coverSmallpic:'/static/images/login_page/cover_small_11.jpg',
+                  videoSrc:'http://1252908573.vod2.myqcloud.com/5b62a68cvodcq1252908573/0d44ce1d5285890783288876406/e2LXoV4Oa4AA.mp4'
+              },
+              {
+                  coverpic:'/static/images/login_page/cover_big_12.jpg',   //Angela RL
+                  coverSmallpic:'/static/images/login_page/cover_small_12.jpg',
+                  videoSrc:'http://1252908573.vod2.myqcloud.com/5b62a68cvodcq1252908573/0d44c6805285890783288876274/JhY0O9bVaTQA.mp4'
+              }
+          ]
+      }
+    },
+    mounted(){
+  
+    },
+    updated(){
+
+    },
+    methods:{
+        checkTencent(tencentInfo){
+            let options = {
+                mp4: this.nowVideoSrc,
+                coverpic: {
+                    style: 'cover',
+                    src: tencentInfo.coverpic
+                },
+                autoplay: false,
+                width: '1000',
+                height: '500'
+            };
+            var player = new TcPlayer('video-container', options);
+            window.qcplayer = player;            
+        },
+        openTencent(tencentInfo){
+            this.isShowVideo = true;
+            this.nowVideoSrc = tencentInfo.videoSrc;
+            $('.vcp-playing').remove();
+            $('.vcp-player').remove();
+            this.checkTencent(tencentInfo);
+        },
+        closeTencent(){
+            this.isShowVideo = false;
+            $('.vcp-playing').remove();
+        },  
+        closeRequest(){
+            isShowLoginBox = false;
+            $('#login_box.login-J-down-load-app').hide();
+        },
+        loginWebSite(){
+            let that = this;
+            this.isShowSolveBtn = false;
+            this.isShowLoginState = false;
+            isShowLoginBox = true;
+            $('#login_box.login-J-down-load-app').show();
+            AV.User.logOut();
+            this.$store.dispatch('logOut')
+            //加载数据
+            $.ajax({
+                type:'GET',
+                url:"https://stg-pteppp.leanapp.cn/weblogin/getqr/",
+                data:{},
+                async:true,
+                success:function(res){
+                    $('.login-download-modal-wrapper .login-content .erweima').attr('src',res.qr);
+                    that.obtainLoginState(res.session);
+                },
+                error:function(error){
+                    console.log(error);
+                }
+            })
+        },
+        obtainLoginState(id){
+            var timer = null;
+            clearTimeout(timer);
+            let that = this;
+            $.ajax({
+                type:"Get",
+                url:"https://stg-pteppp.leanapp.cn/weblogin/update/"+id+"",
+                data:{},
+                async:true,
+                success:function(res){
+                    let state = res.state;
+                    console.log(state);
+                    if(state ==='normal'){
+                        if(isShowLoginBox){
+                            timer = setTimeout(() => {
+                            that.obtainLoginState(id);
+                            },1000);
+                        }
+                    }else if(state ==='scan'){
+                        if(isShowLoginBox){
+                            timer = setTimeout(() => {
+                            that.obtainLoginState(id);
+                            },1000);
+                        }
+                        $('.login-download-modal-wrapper .login-content .erweima').attr('src','/static/images/login_page/load.gif');
+                        that.loginState = '已扫码';
+                        that.isShowLoginState = true;
+                    }else if(state == 'auth'){
+                        that.loginState = '正在登录';
+                        that.userLogin(res)
+                    }else if(state == 'invalid'){
+                        that.loginState = '已失效';
+                    }
+                },
+                error:function(){
+                    that.loginState = '登录失败，请重试';
+                    that.isShowLoginState = true;
+                }
+            })
+        },
+        solveExtent(){
+            this.loginWebSite();
+        },
+        async LoginVerifyData () {
+            try {
+                return await LoginVerify()
+            } catch (err) {
+                // this.WarnError(err);
+                console.log(err)
+                return Promise.reject(err)
+            }
+
+        },
+        userLogin(res){
+            let that = this;
+            try {
+                let auth = res.auth
+                console.log(auth);
+                AV.User.loginWithAuthData(res.auth, 'lc_weapp', {
+                    failOnNotExist: true
+                }).then(user => {
+                    window.userJSON = JSON.parse(JSON.stringify(user))
+                    // commit to vuex
+                    this.$store.dispatch('user_login', window.userJSON)
+                    return this.LoginVerifyData()
+                })
+                .then(() =>{
+                    this.$router.push({ path: '/index' })
+                })
+                .catch(err => {
+                    this.WarnError(err);
+                })
+            } catch (error) {
+                this.WarnError(error);
+            }
+        },
+        WarnError(Error){
+            let obj = JSON.parse(JSON.stringify(Error));
+            let str = obj.rawMessage || obj.error;
+            this.loginState = str;
+            this.isShowSolveBtn = true;
+            $('.login-download-modal-wrapper .login-content .erweima').attr('src','/static/images/login_page/unified-baidu-statistics.jpg');
+        }
+    }
+  }
+</script>
+
+<style>
+  @import "../../less/Landing/auto_combine_90e1c_fadc247.less";
+  @import "../../less/Landing/auto_combine_e9548_3e22ea4.less";
+  @import "../../less/Landing/common.less";
+  .container-intro{
+      color: #fff !important;
+  }
+.solve{
+    padding: 0 20px;
+    height:40px;
+    margin-top:10px;
+    border-radius:4px;
+    color:#fff;
+    font-size:16px;
+    box-shadow:0 0 5px #00b3fe;
+    background:#1bd1fc;
+    letter-spacing:1px;
+    &:hover{
+    box-shadow:0 0 10px #00b3fe;
+    }
+}
+</style>

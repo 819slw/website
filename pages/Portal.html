@@ -1,0 +1,512 @@
+<template>
+<div id="login_home">
+  <div id="nv_portal" class="pg_index" style="position:relative">
+        <nav class="navbar clearfix J-nav">
+            <div class="container">
+                <div class="navbar-header">
+                    <i class="ico-list navbar-toggle collapsed cursor"></i>
+                    <a class="navbar-logo" href="">
+                    </a>
+                </div>
+                <div class="navbar-collapse nav-hide" id="J-navbar-collapse">
+                    <i class="material-icons icon navbar-toggle close-toggle cursor">close</i>
+                    <ul class="navbar-nav nav-list navbar-left">
+                        <router-link to="/">
+                            <li class="nav-list-item" id="home_page"><a>首页</a></li>
+                        </router-link>
+                        <router-link to="/CaseOperate">
+                            <li class="nav-list-item" id="case_page"><a>课程&会员</a></li>
+                        </router-link>
+                        <router-link to="/Member">
+                            <li class="nav-list-item" id=""><a>用户案例</a></li>
+                        </router-link>
+                        <router-link to="/InstructionalVideo">
+                            <li class="nav-list-item" id=""><a>教学视频</a></li>
+                        </router-link>
+                        <router-link to="/Portal">
+                            <li class="nav-list-item active" id="about_page"><a>用户社区</a></li>
+                        </router-link>
+                    </ul>
+                    <ul class="navbar-nav nav-button-group navbar-right">
+                        <li class="nav-list-item">
+                            <button class="download-btn btn-animation follow-Public-number"><span>免费领取资料</span></button>
+                        </li>
+                        <li class="nav-list-item">
+                            <button class="download-btn btn-animation follow-Small-program"><span>PTE交流群</span></button>
+                        </li>
+                        <li class="nav-list-item J-register-btn">
+                            <a>
+                                <button class="signin-btn btn-animation btn-an-adverse" @click="loginWebSite()"><span>注册</span></button>
+                            </a>
+                        </li>
+                        <li class="nav-list-item J-login-btn">
+                            <a>
+                                <button class="signin-btn btn-animation btn-an-adverse " @click="loginWebSite()"><span>登录</span></button>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+<div class="erweima-download-modal-wrapper erweima-J-down-load-app" style="display: none;">
+    <div class="erweima-download-modal-bg"></div>
+    <div class="erweima-download-modal">
+        <div class="download-modal-header">
+            <div class="erweima-modal-close"></div>
+        </div>
+        <div class="download-modal-body">
+            <div class="download-title">扫描二维码 下载APP</div>
+            <div class="download-sub-title"></div>
+            <img class="download-code" src="/static/images/login_page/offical_weichat_1a0871c.jpg">
+        </div>
+    </div>
+</div>
+
+   <!-- //登陆弹出框 -->
+<div class="login-download-modal-wrapper login-J-down-load-app" id="login_box">
+    <div class="login-download-modal-bg" @click="closeRequest()"></div>
+    <div class="login-download-modal login-grid">
+      <img class="grid-top-pic" src="/static/images/login_page/loginBoxTop.png" style="max-width: 100%">
+      <div class="top-word">
+        <p class="brand-intro-font">PTE黑科技在线学习平台</p>
+        <p class="brand-edition-font">Ver 1.15.0版本</p>
+      </div>
+      <div class="login-content">
+        <img class="erweima" src="/static/images/login_page/load.gif" />
+        <div style="font-size:14px;color:red;max-width:60%" v-if="isShowLoginState">{{ loginState }}</div>
+        <p class="login-font-style">请使用微信扫描二维码登录</p>
+        <p class="login-font-style">“PTE黑科技”</p>
+        <button class="solve" v-if="isShowSolveBtn" @click="solveExtent">已解决？点击刷新</button>
+      </div>
+    </div>
+</div>
+<div style="padding-top:100px;"></div>
+  <v-carousel class="turnContainer elevation-0" hide-delimiters >
+    <v-carousel-item v-for="(item,i) in turnPic"  :src="turnImg" :key="i">
+        <a :href="item.href" target="_blank">
+            <img :src="item.src" />
+        </a>
+    </v-carousel-item>
+  </v-carousel>
+
+<div id="wp" class="wp mt-5">
+<div class="wp cl">
+    <template v-if="isSwitchArticleAssembly">
+        <v-layout style="flex-direction: column;">
+            <v-flex xs12 sm12 v-for="(item,index) in ArticleInfo" :key="index">
+            <v-card>
+                <v-card-media
+                :src="item.img"
+                height="200px"
+                ></v-card-media>
+
+                <v-card-title primary-title>
+                <div>
+                    <h3 class="headline mb-0">{{ item.title }}</h3>
+                    <div>{{ item.content }}</div>
+                </div>
+                </v-card-title>
+            </v-card>
+            </v-flex>
+        </v-layout>
+    </template>
+
+
+<div class="col1 z" v-if="!isSwitchArticleAssembly">
+    <div class="bp">
+        <div class="pSlide"><div id="diy1" class="area"><div id="frameqxfYFT" class="frame move-span cl frame-1"><div id="frameqxfYFT_left" class="column frame-1-c"><div id="frameqxfYFT_left_temp" class="move-span temp"></div><div id="portal_block_17" class="block move-span"><div id="portal_block_17_content" class="dxb_bc"><div class="module cl xld">
+            <dl class="cl" v-for="item in ArticleInfo">
+                <dd class="m"><a :href="item.href" target="_blank"><img :src="item.img" width="200" height="150" alt="新手必看：一文教你轻松入门BDP，从此变身数据达人！"></a></dd>
+                <dt><em class="y xg1 xw0"><a href="space-username-.html" target="_blank"></a></em><a :href="item.href" :title="item.title" target="_blank">{{ item.title }}</a></dt>
+                <dd style="text-indent:2em;">{{ item.content }}</dd>
+            </dl>
+        </div>
+    </div>
+</div>
+</div></div></div></div>
+<div class="txtRoll"><div id="diy14" class="area"></div></div>
+</div>
+</div>
+
+
+<div class="col2 y" v-if="isShowSidebar">
+    <div class="hotTag bp" style="padding:0;">
+        <div class="blocktitle title" style="background:url(/static/images/login_page/Portal-hot-topic.png)no-repeat 100% 100%;height:63px;color:#fff"><span style="display: inline-block;margin: 20px 10px;">热门话题</span></div>
+        <div class="tagMod cl">
+            <ul id="topic">
+                <li><a href="https://w.url.cn/s/AbMJ0U1" target="_blank"><span class="box-color border">1</span>成绩出来了 spelling分数爆低 这可能是因为你英美混写了!</a></li>
+                <li><a href="https://w.url.cn/s/ArnNyZy" target="_blank"><span class="box-color border">2</span>进入了这些误区 你的DI分数将很难提高  </a></li>
+                <li><a href="https://w.url.cn/s/AwLDvqV" target="_blank"><span class="box-color border">3</span>阅读速度太慢？别担心，找到这些关键词可以迅速找点 </a></li>
+                <li><a href="https://w.url.cn/s/AxSGS6h" target="_blank"><span class="box-color">4</span>不会分析成绩单？那今天这篇你一定不能错过</a></li>
+                <li><a href="https://w.url.cn/s/AmsklAq" target="_blank"><span class="box-color">5</span>精听和泛听材料的选择</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+</div>
+</div>
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <ul class="footer-nav-container">
+                    <router-link to="/">
+                        <li><a class="container-intro">首页</a><i class="disc"></i></li>
+                    </router-link>
+                    <router-link to="/CaseOperate">
+                        <li><a class="container-intro">课程&会员</a><i class="disc"></i></li>
+                    </router-link>
+                    <router-link to="/Member">
+                        <li><a class="container-intro">用户案例</a><i class="disc"></i></li>
+                    </router-link>
+                    <router-link to="/InstructionalVideo">
+                        <li><a class="container-intro">教学视频</a><i class="disc"></i></li>
+                    </router-link>
+                    <router-link to="/Portal">
+                        <li><a class="container-intro">用户社区</a><i class="disc"></i></li>
+                    </router-link>
+                    <router-link to="/AboutUs">
+                        <li class="container-intro">公司简介<i class="disc"></i></li>
+                    </router-link>
+                    <li id="showPCall">联系我们</li>
+                </ul>
+                <ul class="contact-container footer-mesg">
+                    <li><i class="ico ico-address"></i>深圳市南山区南山街道南海大道西桂庙路北阳光华艺大厦1栋4F、4G-20</li>
+                    <li><a href="https://www.zhihu.com/org/ptehei-ke-ji/posts"><i class="ico ico-zhihu"></i>黑科技PTE</a></li>
+                    <li><i class="ico ico-phone"></i>400-101-9155</li>
+                    <li><a id="email_contact" href="mailto:info@ikk.ai"><i class="ico ico-email"></i>info@ikk.ai</a></li>
+                </ul>
+                <p class="copyright">Copyright 2017 - 2018 粤ICP备18023850号 ikk. All Rights Reserved.<span>深圳市科科智能科技有限公司 版权所有</span></p>
+            </div>
+            <div class="col-md-2 footer-code">
+                <p class="code-name">PTE微信公众号</p>
+                <img src="/static/images/login_page/unified-baidu-statistics.jpg" width="100px">
+                <p class="code-info">更多PTE热门资讯</p>
+            </div>
+            <div class="col-md-2 footer-code">
+                <p class="code-name">PTE小程序</p>
+                <img src="/static/images/login_page/offical_weichat_1a0871c.jpg" width="100px">
+                <p class="code-info">扫TA随时开始学习</p>
+            </div>
+            <div class="col-md-2 footer-code">
+                <p class="code-name">客服二维码</p>
+                <img src="/static/images/login_page/unified-baidu-statistics.jpg" width="100px">
+                <p class="code-info">咨询更多问题</p>
+            </div>
+        </div>
+    </div>
+</footer>
+  </div>
+  </div>
+</template>
+<script>
+var isShowLoginBox = false;
+import AV from 'leancloud-storage'
+  import {
+    LoginVerify
+  } from '@/api/user'
+import '../../assets/js/public.js'
+
+  /* eslint-disable */
+  export default {
+    data () {
+      return {
+          turnImg:'',
+          isShowLoginState:false,
+          loginState:'',
+          isShowSolveBtn:false,
+          isShowSidebar:true,
+          isSwitchArticleAssembly:false,
+          turnPic:[
+              {
+                  src:'/static/images/login_page/tips.jpg',
+                  href:'https://w.url.cn/s/AWoyx6H'
+              },
+              {
+                  src:'/static/images/login_page/01.jpg',
+                  href:'https://w.url.cn/s/A3RVcQe'
+              },
+              {
+                  src:'/static/images/login_page/banner_0705_2.jpg',
+                  href:'https://w.url.cn/s/AEDqwfl'
+              }
+          ],
+          card_text: 'Lorem ipsum dolor sit amet, brute iriure accusata ne mea. Eos suavitate referrentur ad, te duo agam libris qualisque, utroque quaestio accommodare no qui. Et percipit laboramus usu, no invidunt verterem nominati mel. Dolorem ancillae an mei, ut putant invenire splendide mel, ea nec propriae adipisci. Ignota salutandi accusamus in sed, et per malis fuisset, qui id ludus appareat.',
+        ArticleInfo:[
+            {
+                href:'https://w.url.cn/s/AGwFeeB',
+                img:'/static/images/login_page/Public_number_1.jpg',
+                content:'先说下我的pte复习之路，我是在一月份开始正式准备的pte，后来上了押题班，3月份第一次考了7炸，过了两周发现要8炸，又开始接着复习，考了一次发现不行，就报了黑科技Brenda的口语班，第三次考口语过了8但是听力还是差一些，就又报了Marie老师的听力班。',
+                title:'她的八炸 来源于对PTE的特殊理解'
+            },
+            {
+                href:'https://w.url.cn/s/AwlMcPf',
+                img:'/static/images/login_page/Public_number_2.jpg',
+                content:'想分享给各位还奋斗在路上的兄弟姐妹们，仅仅十小时的一对一辅导和真的很零碎的半夜两三点的复习时间是如何备考第三次pte的经历。虽然我要的分数很低，但也想把遇见黑科技的这份幸运传递下去，还请各位大神多指点！',
+                title:'全职宝妈碎片时间备考 20小时攻下PTE'
+            },
+            {
+                href:'https://w.url.cn/s/A2WX2yv',
+                img:'/static/images/login_page/Public_number_3.jpg',
+                content:'先说下我的pte复习之路，我是在一月份开始正式准备的pte，后来上了押题班，3月份第一次考了7炸，过了两周发现要8炸，又开始接着复习，考了一次发现不行，就报了黑科技Brenda的口语班，第三次考口语过了8但是听力还是差一些，就又报了Marie老师的听力班。',
+                title:'八炸备考什么最重要？机经，运气，能力还是……'
+            },
+            {
+                href:'https://w.url.cn/s/ALwJG2F',
+                img:'/static/images/login_page/Public_number_4.jpg',
+                content:'说说报班这个事吧，我在这上面花了不少冤枉钱，但是效果真的甚微，最后我选择黑科技一对一也是我觉得黑科技APP实在太棒了，能这么用心帮助广大考生的机构，一定也是非常良心的！现在看来，我当时的决定是正确的。',
+                title:'只是改了一些小毛病 PTE各项分数立涨十几分'
+            },
+            {
+                href:'https://w.url.cn/s/A16WtHv',
+                img:'/static/images/login_page/Public_number_5.jpg',
+                content:'虽然长期目标是8炸，不过阶段性7炸非常开心，高考英语31分的英语学渣一路走来不容易，写经验前先感谢大班长，无私奉献的鸡精，还有上1v1课后老师给的复习方向和经验都很有用，避免自己在错误的方向上浪费时间。',
+                title:'高考英语31分到PTE7炸 这一路走来真的不容易'
+            },
+            {
+                href:'https://w.url.cn/s/ABNsZZl',
+                img:'/static/images/login_page/Public_number_6.jpg',
+                content:'在考第三次的时候高分七炸（与头两次的分数比有了质的飞跃），考前用了小两周的时间只准备了口语，提高流力度和发音，当时才知道口语要一直压低声音，保持平稳才能识别的好，而且对于口语来说，流利度是最最最重要的！',
+                title:'9次考试终于5项90分，她的操作才叫666   '
+            },
+            {
+                href:'https://w.url.cn/s/ALbMXG4',
+                img:'/static/images/login_page/Public_number_7.jpg',
+                content:'在出国读研之前，我的雅思成绩在7/7/7/6的水平上，写作上不来所以才转战了PTE。讲真，对于一个听力一般般的人来说，PTE真的没有想象中的那么简单，希望跟我成绩差不多的小伙伴们不要太轻敌，还是要好好准备的哦！',
+                title:'期末与PTE齐飞 高效复习也能炸 '
+            },
+            {
+                href:'https://w.url.cn/s/AdqcZTC',
+                img:'/static/images/login_page/Public_number_8.jpg',
+                content:'知道pte的存在也是今年三月份的事情了，听说pte出分快并且比雅思更容易过的情况下，在四月份决定转战pte。考前两三天发现了pte黑科技，稍微看了些就去考了结果第一次口语非常低，在这个情况下就报了pte黑科技的口语课。',
+                title:'口语从48到双90，她到底经历了什么？ '
+            },
+            {
+                href:'https://w.url.cn/s/A69PrQq',
+                img:'/static/images/login_page/Public_number_9.jpg',
+                content:'后来在雅思还是pte上纠结了半天，觉得pte出分快，上午考完晚上出分，而雅思要干耗两周，而且我们学校要求必须在最后五周的语言班考试之前交成绩才算数，否则只能按你语言班成绩来算你是否能否入学。',
+                title:'雅思虐我千百遍 转考PTE 脱坑就用12天'
+            },
+
+        ]
+      }
+    },
+    created(){
+        this.GetScrollSize();
+    },
+    mounted(){
+      let that = this;
+      window.onresize = function(){
+        that.GetScrollSize();
+      }
+    },
+    updated(){
+
+    },
+    methods:{
+        GetScrollSize(){
+            let gridPicWidth = document.documentElement.clientWidth || document.body.clientWidth;
+            if(gridPicWidth <=1200){
+            this.isShowSidebar = false;
+            }else{
+            this.isShowSidebar = true;
+            }
+            if( gridPicWidth<=780){
+                this.isSwitchArticleAssembly = true;
+            }else{
+                this.isSwitchArticleAssembly = false;
+            }
+        },
+        closeRequest(){
+            isShowLoginBox = false;
+            $('#login_box.login-J-down-load-app').hide();
+        },
+        loginWebSite(){
+            let that = this;
+            this.isShowSolveBtn = false;
+            this.isShowLoginState = false;
+            isShowLoginBox = true;
+            $('#login_box.login-J-down-load-app').show();
+            AV.User.logOut();
+            this.$store.dispatch('logOut')
+            //加载数据
+            $.ajax({
+                type:'GET',
+                url:"https://stg-pteppp.leanapp.cn/weblogin/getqr/",
+                data:{},
+                async:true,
+                success:function(res){
+                    $('.login-download-modal-wrapper .login-content .erweima').attr('src',res.qr);
+                    that.obtainLoginState(res.session);
+                },
+                error:function(error){
+                    console.log(error);
+                }
+            })
+        },
+        obtainLoginState(id){
+            var timer = null;
+            clearTimeout(timer);
+            let that = this;
+            $.ajax({
+                type:"Get",
+                url:"https://stg-pteppp.leanapp.cn/weblogin/update/"+id+"",
+                data:{},
+                async:true,
+                success:function(res){
+                    let state = res.state;
+                    console.log(state);
+                    if(state ==='normal'){
+                        if(isShowLoginBox){
+                            timer = setTimeout(() => {
+                            that.obtainLoginState(id);
+                            },1000);
+                        }
+                    }else if(state ==='scan'){
+                        if(isShowLoginBox){
+                            timer = setTimeout(() => {
+                            that.obtainLoginState(id);
+                            },1000);
+                        }
+                        $('.login-download-modal-wrapper .login-content .erweima').attr('src','/static/images/login_page/load.gif');
+                        that.loginState = '已扫码';
+                        that.isShowLoginState = true;
+                    }else if(state == 'auth'){
+                        that.loginState = '正在登录';
+                        that.userLogin(res)
+                    }else if(state == 'invalid'){
+                        that.loginState = '已失效';
+                    }
+                },
+                error:function(){
+                    that.loginState = '登录失败，请重试';
+                    that.isShowLoginState = true;
+                }
+            })
+        },
+        solveExtent(){
+            this.loginWebSite();
+        },
+        async LoginVerifyData () {
+            try {
+                return await LoginVerify()
+            } catch (err) {
+                // this.WarnError(err);
+                console.log(err)
+                return Promise.reject(err)
+            }
+
+        },
+        userLogin(res){
+            let that = this;
+            try {
+                let auth = res.auth
+                console.log(auth);
+                AV.User.loginWithAuthData(res.auth, 'lc_weapp', {
+                    failOnNotExist: true
+                }).then(user => {
+                    window.userJSON = JSON.parse(JSON.stringify(user))
+                    // commit to vuex
+                    this.$store.dispatch('user_login', window.userJSON)
+                    return this.LoginVerifyData()
+                })
+                .then(() =>{
+                    this.$router.push({ path: '/index' })
+                })
+                .catch(err => {
+                    this.WarnError(err);
+                })
+            } catch (error) {
+                this.WarnError(error);
+            }
+        },
+        WarnError(Error){
+            let obj = JSON.parse(JSON.stringify(Error));
+            let str = obj.rawMessage || obj.error;
+            this.loginState = str;
+            this.isShowSolveBtn = true;
+            $('.login-download-modal-wrapper .login-content .erweima').attr('src','/static/images/login_page/unified-baidu-statistics.jpg');
+        }
+    }
+  }
+</script>
+<!-- style_5_common有数据请求  -->
+<!--/style_5_common.less  -->
+<style lang="less">
+  @import "../../less/Landing/auto_combine_27876_2f360d4.css";
+  @import "../../less/Landing/style_5_common.css";
+  @import "../../less/Landing/style.less";
+  @import "../../less/Landing/common.less";
+  #nv_portal{
+    .navbar{
+        background: #069af4;
+    }
+    .solve{
+         padding: 0 20px;
+         height:40px;
+         margin-top:10px;
+         border-radius:4px;
+         color:#fff;
+         font-size:16px;
+         box-shadow:0 0 5px #00b3fe;
+         background:#1bd1fc;
+         letter-spacing:1px;
+         &:hover{
+            box-shadow:0 0 10px #00b3fe;
+         }
+    }
+        .container-intro{
+            color: #fff !important;
+        }
+        .v-carousel{
+            width:1200px;
+            height:100%;
+            margin: 0 auto;
+            // margin-top:100px;
+        }
+        .v-carousel img{
+            width:100%;
+            height:100%;
+        }
+        .v-carousel__prev{
+            left:25px;
+        }
+        .v-carousel__next{
+            right:25px;
+        }
+        .v-btn--icon{
+            width:5px;
+            height:5px;
+        }
+        .v-banner-slogan{
+            font-size:16px !important;
+            letter-spacing:1px !important;
+        }
+        .cl .m img{
+            width: 243px !important;
+        }
+        .mt-100{
+            /* margin-top:30px; */
+        }
+        .bk{
+            background:#0E9FF5;
+        }
+  }
+    @media (max-width: 1200px){
+        #nv_portal{
+            .v-carousel{
+                width:100%;
+            }
+            .wp{
+                width:100%;
+                display:flex;
+                justify-content:center;
+                align-items:center;
+            }
+        }
+    }
+
+</style>

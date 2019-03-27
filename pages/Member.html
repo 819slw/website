@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../static/css/auto_combine_73112_320ecc7.css">
+    <link rel="stylesheet" href="../static/css/auto_combine_e9548_3e22ea4.css">
+    <link rel="stylesheet" href="../static/css/common.css">
+</head>
+<body>
+    <div id="login_home">
+        <div class="bdp-personal" style="position:relative">
+      <nav class="navbar clearfix J-nav">
+          <div class="container">
+              <div class="navbar-header">
+                  <i class="ico-list navbar-toggle collapsed cursor"></i>
+                  <a class="navbar-logo" href="">
+                  </a>
+              </div>
+              <div class="navbar-collapse nav-hide" id="J-navbar-collapse">
+                  <!-- <i class="ico-close navbar-toggle close-toggle"></i> -->
+                  <i class="material-icons icon navbar-toggle close-toggle cursor">close</i>
+                  <ul class="navbar-nav nav-list navbar-left">
+                    <a href="../index.html">
+                        <li class="nav-list-item active" id="home_page">首页</li>
+                    </a>
+                    <a href="./caseOperate.html">
+                        <li class="nav-list-item" id="case_page">课程&会员</li>
+                    </a>
+                    <!-- 因为bdp做的是当游览器宽度小于992的时候 隐藏用户案例 和教学视频所以这里删除id名称 member_info  instructional_video -->
+                    <!-- 并将767宽度兼容 改为840 -->
+                    <a href="#">
+                        <li class="nav-list-item" id="">用户案例</li>
+                    </a>
+                </ul>
+                  <ul class="navbar-nav nav-button-group navbar-right">
+                      <li class="nav-list-item">
+                          <button class="download-btn btn-animation follow-Public-number"><span>免费领取资料</span></button>
+                      </li>
+                      <!-- icp临时取消 -->
+                      <!-- <li class="nav-list-item">
+                          <button class="download-btn btn-animation follow-Small-program"><span>PTE交流群</span></button>
+                      </li> -->
+                      <li class="nav-list-item J-register-btn">
+                          <a>
+                              <button class="signin-btn btn-animation btn-an-adverse" @click="loginWebSite()"><span>注册</span></button>
+                          </a>
+                      </li>
+                      <li class="nav-list-item J-login-btn">
+                          <a>
+                              <button class="signin-btn btn-animation btn-an-adverse " @click="loginWebSite()"><span>登录</span></button>
+                          </a>
+                      </li>
+                  </ul>
+              </div>
+          </div>
+      </nav>
+      
+      
+      
+      <!-- 扫描二维码 -->
+      <div class="erweima-download-modal-wrapper erweima-J-down-load-app" style="display: none;">
+          <div class="erweima-download-modal-bg"></div>
+          <div class="erweima-download-modal">
+              <div class="download-modal-header">
+                  <div class="erweima-modal-close"></div>
+              </div>
+              <div class="download-modal-body">
+                  <div class="download-title">扫描二维码 下载APP</div>
+                  <div class="download-sub-title"></div>
+                  <img class="download-code" src="../static/images/offical_weichat_1a0871c.jpg">
+              </div>
+          </div>
+      </div>
+      
+         <!-- //登陆弹出框 -->
+      <div class="login-download-modal-wrapper login-J-down-load-app" id="login_box">
+          <div class="login-download-modal-bg" @click="closeRequest()"></div>
+          <div class="login-download-modal login-grid">
+            <img class="grid-top-pic" src="../static/images/loginBoxTop.png" style="max-width: 100%">
+            <div class="top-word">
+              <p class="brand-intro-font">PTE黑科技在线学习平台</p>
+              <p class="brand-edition-font">Ver 1.15.0版本</p>
+            </div>
+            <div class="login-content">
+              <img class="erweima" src="../static/images/load.gif" />
+              <div style="font-size:14px;color:red;max-width:60%" v-if="isShowLoginState">{{ loginState }}</div>
+              <p class="login-font-style">请使用微信扫描二维码登录</p>
+              <p class="login-font-style">“PTE黑科技”</p>
+              <button class="solve" v-if="isShowSolveBtn" @click="solveExtent">已解决？点击刷新</button>
+            </div>
+          </div>
+      </div>
+      
+      
+          <section class="banner case-banner J-scorll-top">
+              <h5 class="banner-title">圈子</h5>
+              <p class="banner-slogan">圈子很小，口碑很重要</p>
+          </section>
+      <div class="J-new-media" style="display: block;">
+          <section class="container case-section pain-points" style="margin:100px auto">
+              <div class="pain-points-header">
+                  考过PTE很重要，可是臣妾做不到
+              </div>
+              <div class="pain-points-body">
+                  <ul class="pain-list clearfix">
+                      <li class="pain-item-wrap">
+                          <div class="pain-item">
+                              以前大学英语4级-6级水平，多年没学英语 ，如今年龄偏大，为了移民，备考很匆忙~(>_<)~
+                              <div class="pain-logo yy-situation-1"></div>
+                          </div>
+                      </li>
+                      <li class="pain-item-wrap">
+                          <div class="pain-item">
+                              从没考过pte，但是生活中一直都有接触英语，底子比较好，大学英语6级水平，不知道怎么才能一次性就通过考试(ಥ﹏ಥ)
+                              <div class="pain-logo yy-situation-2"></div>
+                          </div>
+                      </li>
+                      <li class="pain-item-wrap">
+                          <div class="pain-item">
+                              考过pte，已成功通过考试，但是想冲击更高的分数，一直不得要领ヽ(#`Д´)ﾉ
+                              <br>
+                              <br>
+                              <div class="pain-logo yy-situation-3"></div>
+                          </div>
+                      </li>
+                  </ul>
+              </div>
+          </section>
+      
+          <section class="bdp-solution clearfix">
+              <div class="container case-section" style="margin:100px auto">
+                  <div class="bdp-solution-header">
+                      在黑科技PTE，关于考试的一切将变得简单
+                  </div>
+                  <div class="bdp-solution-body">
+                      <ul class="solution-list clearfix">
+                          <li class="solution-item-wrap_4">
+                              <div class="solution-item">
+                                  <i class="ico-solution yy-value-1"></i>
+                                  <p class="solution-title">
+                                      操作简单，易上手
+                                  </p>
+                                  <p class="solution-intro">
+                                      刚接触pte考生，不懂规则没关系，在黑科技答题练习就好了~
+                                  </p>
+                              </div>
+                          </li>
+                          <li class="solution-item-wrap_4">
+                              <div class="solution-item">
+                                  <i class="ico-solution yy-value-2"></i>
+                                  <p class="solution-title">
+                                      自动生成分析报表
+                                  </p>
+                                  <p class="solution-intro">
+                                      运用当下最具突破性技术，一键生成自己当前学习情况~
+                                  </p>
+                              </div>
+                          </li>
+                          <li class="solution-item-wrap_4">
+                              <div class="solution-item">
+                                  <i class="ico-solution yy-value-3"></i>
+                                  <p class="solution-title">
+                                      学习计划预测预警
+                                  </p>
+                                  <p class="solution-intro">
+                                      针对考生学习能力的短板，进行专项技能提升~
+                                  </p>
+                              </div>
+                          </li>
+                          <li class="solution-item-wrap_4">
+                              <div class="solution-item">
+                                  <i class="ico-solution yy-value-4"></i>
+                                  <p class="solution-title">
+                                      微信数据实时同步
+                                  </p>
+                                  <p class="solution-intro">
+                                      一键链接微信小程序，数据统一实时更新~
+                                  </p>
+                              </div>
+                          </li>
+                      </ul>
+                  </div>
+              </div>
+          </section>
+      
+          <section class="real-example clearfix">
+              <div class="container case-section" style="margin:100px auto">
+                  <div class="real-example-header">
+                      真实的考生案例
+                  </div>
+                  <div class="real-example-body">
+                      <ul class="example-list clearfix">
+                          <li class="example-item-wrap">
+                              <div class="example-item">
+                                  <div class="example-user-info">
+                                      <div class="logo-study yy-touxiang1"></div>
+                                      <div class="name">
+                                          秋鹿鸣
+                                      </div>
+                                      <div class="company">
+                                          PTE黑科技押题班 & 听力集训班
+                                      </div>
+                                  </div>
+                                  <div style="line-height: 28px; font-size: 20px;  color: rgba(10,18,32,.87); ">
+                                      这才是上班族备考本来的样子！！！
+                                  </div>
+                                  <div class="example-question">
+                                      <span class="label">经验分享:</span>
+                                      我是一名上班狗，之前都是下班回家后每晚读2个小时，周末多花一些时间；这次索性和老板请了两周假，复习一周考一次 ；在这里建议上班族们可以试试，衡量一下 pte分数对你的重要性，然后把全部精力放在复习备考上，在短期内保持状态去冲刺几次考试，一定比拉长战线效果来得好虽然每个人上课的吸收程度不一样，但是还是非常推荐黑科技Marie老师的听力课（突破听力瓶颈），以及押题班(黑科技的押题鸡精，采用大数据，尤其在写作方面，为我备考节省了很多时间，让我得以专心攻克听力难题）一开始上手pte的时候我花了大量的时间练习RA，保证每个单词发音的正确（有些单词的发音是错误的，如果没有去及时纠正，然后错误的东西练习100遍也还是错的，平时背单词的时候多积累，多动手查词典）。元音饱满，辅音清晰，以及动名词结尾形态变化也确保能读出来；我都是直接对着微信文件传输助手练的。
+                                  </div>
+                                  <div class="learn-more">
+                                      <a class="btn-learn-more" href="https://mp.weixin.qq.com/s/jYZImVxS5t6llNrPLMBylg" target="_blank">了解TA的故事</a>
+                                  </div>
+                              </div>
+                          </li>
+                          <li class="example-item-wrap">
+                              <div class="example-item">
+                                  <div class="example-user-info">
+                                      <div class="logo-study yy-touxiang2"></div>
+                                      <div class="name">
+                                          Peter
+                                      </div>
+                                      <div class="company">
+                                          PTE黑科技押题班
+                                      </div>
+                                  </div>
+                                  <div  style="line-height: 28px; font-size: 20px;  color: rgba(10,18,32,.87); ">
+                                      终于过了！等这一刻已经很久了...
+                                  </div>
+                                  <div class="example-question">
+                                      <span class="label">经验分享：</span>
+                                      喔！喔！！喔！！！
+                                      我从2017年8月第一次接触PTE，当时在读研究生准备毕业移民，我的学长学姐们基本都是60分直接拿PR。我一边忙着搞毕业设计，一边准备NAATI(现在的CCL)。我心里想的是，大家60分都能PR了，如果我有了65分（NATTI的5分加PTE 7炸的10分），肯定秒下PR。我1月份的时候拿到了NATTI的5分，开始认真复习PTE，指南针的中介还告诉我说，你们这个是冷门专业，65分肯定可以移民了。我是一个有着严重英语厌学情绪的人，而且属于单词背完就忘，周围的朋友又都是中国人。我拿着我的PTE的成绩单开始绝望，61分到65分都很难，更别说炸八了一次偶然的机会，朋友推荐我看机经，说考试很多题都是重复的，我就打听到了黑科技，当时还没有小程序，大班长会耐心的把题目整理成PDF，免费发给大家。
+                                      <br>
+                                      <br>
+                                      <br>
+                                  </div>
+                                  <div class="learn-more">
+                                      <a class="btn-learn-more" href="https://w.url.cn/s/AGwFeeB" target="_blank">了解TA的故事</a>
+                                  </div>
+                              </div>
+                          </li>
+                      </ul>
+                  </div>
+              </div>
+          </section>
+      </div>
+      
+      
+      
+      <footer>
+          <div class="container">
+              <!-- <div class="row">
+                  <img src="/static/../static/images/new_home/footer_logo.png" class="logo footer-logo">
+              </div> -->
+              <div class="row">
+                  <div class="col-md-8">
+                      <ul class="footer-nav-container">
+                          <router-link to="/">
+                              <li><a class="container-intro">首页</a><i class="disc"></i></li>
+                          </router-link>
+                          <router-link to="/CaseOperate">
+                              <li><a class="container-intro">课程&会员</a><i class="disc"></i></li>
+                          </router-link>
+                          <router-link to="/Member">
+                              <li><a class="container-intro">用户案例</a><i class="disc"></i></li>
+                          </router-link>
+                          <!-- icp临时取消 -->
+                          <!-- <router-link to="/InstructionalVideo">
+                              <li><a class="container-intro">教学视频</a><i class="disc"></i></li>
+                          </router-link>
+                          <router-link to="/Portal">
+                              <li><a class="container-intro">用户社区</a><i class="disc"></i></li>
+                          </router-link> -->
+                          <router-link to="/AboutUs">
+                              <li class="container-intro">公司简介<i class="disc"></i></li>
+                          </router-link>
+                          <li id="showPCall">联系我们</li>
+                      </ul>
+                      <ul class="contact-container footer-mesg">
+                          <li><i class="ico ico-address"></i>深圳市南山区南山街道南海大道西桂庙路北阳光华艺大厦1栋4F、4G-20</li>
+                          <li><a href="https://www.zhihu.com/org/ptehei-ke-ji/posts"><i class="ico ico-zhihu"></i>黑科技PTE</a></li>
+                          <li><i class="ico ico-phone"></i>400-101-9155</li>
+                          <li><a id="email_contact" href="mailto:info@ikk.ai"><i class="ico ico-email"></i>info@ikk.ai</a></li>
+                          <!-- <li><i class="ico ico-qq"></i>2543360559</li> -->
+                      </ul>
+                      <p class="copyright">收款人邮箱：948674232@qq.com，zhaot90@gmail.com</p>
+                      <p class="copyright">Copyright 2017 - 2018 粤ICP备18023850号 ikk. All Rights Reserved.<span>深圳市科科智能科技有限公司 版权所有</span></p>
+                  </div>
+                  <div class="col-md-2 footer-code">
+                      <p class="code-name">PTE微信公众号</p>
+                      <img src="../static/images/unified-baidu-statistics.jpg" width="100px">
+                      <p class="code-info">更多PTE热门资讯</p>
+                  </div>
+                  <div class="col-md-2 footer-code">
+                      <p class="code-name">PTE小程序</p>
+                      <img src="../static/images/offical_weichat_1a0871c.jpg" width="100px">
+                      <p class="code-info">扫TA随时开始学习</p>
+                  </div>
+                  <div class="col-md-2 footer-code">
+                      <p class="code-name">客服二维码</p>
+                      <img src="../static/images/unified-baidu-statistics.jpg" width="100px">
+                      <p class="code-info">咨询更多问题</p>
+                  </div>
+              </div>
+          </div>
+      </footer>
+        </div>
+          <!-- 写一个不可被关闭的弹窗让用户去访问正式网站 -->
+          <v-dialog
+            v-model="isIntoFormalWebsite"
+            width="500"
+          >
+            <v-card>
+              <v-card-title
+                class="headline grey lighten-2"
+                primary-title
+              >
+                您没有访问该网站的权限
+              </v-card-title>
+      
+              <v-card-text>
+                <div style="font-size:16px;">
+                    <p>请访问PTE黑科技正式网站</p><span class="pr-2">国内用户:</span><a style="color:#0CA3F4" href="https://pte-ai.com" target="_blank">https://pte-ai</a></br><span class="pr-2">澳洲用户:</span><a style="color:#0CA3F4" href="https://pte.ai" target="_blank">https://pte.ai</a>
+                </div>
+              </v-card-text>
+      
+              <v-divider></v-divider>
+      
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn
+                  color="primary"
+                  flat
+                  @click="isIntoFormalWebsite = false"
+                >
+                  继续游览
+                </v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
+        </div>
+</body>
+</html>
+
+
+<template>
+<div id="login_home">
+  <div class="bdp-personal" style="position:relative">
+<nav class="navbar clearfix J-nav">
+    <div class="container">
+        <div class="navbar-header">
+            <i class="ico-list navbar-toggle collapsed cursor"></i>
+            <a class="navbar-logo" href="">
+            </a>
+        </div>
+        <div class="navbar-collapse nav-hide" id="J-navbar-collapse">
+            <!-- <i class="ico-close navbar-toggle close-toggle"></i> -->
+            <i class="material-icons icon navbar-toggle close-toggle cursor">close</i>
+            <ul class="navbar-nav nav-list navbar-left">
+                <router-link to="/">
+                    <li class="nav-list-item" id="home_page"><a>首页</a></li>
+                </router-link>
+                <router-link to="/CaseOperate">
+                    <li class="nav-list-item" id="case_page"><a>课程&会员</a></li>
+                </router-link>
+                 <!-- 因为bdp做的是当游览器宽度小于992的时候 隐藏用户案例 和教学视频所以这里删除id名称 member_info  instructional_video -->
+                 <!-- 并将767宽度兼容 改为840 -->
+                 <!-- icp临时取消 -->
+                <router-link to="/Member">
+                    <li class="nav-list-item active" id=""><a>用户案例</a></li>
+                </router-link>
+                <!-- <router-link to="/InstructionalVideo">
+                    <li class="nav-list-item" id=""><a>教学视频</a></li>
+                </router-link>
+                <router-link to="/Portal">
+                    <li class="nav-list-item" id="about_page"><a>用户社区</a></li>
+                </router-link> -->
+                <!-- <router-link to="/AboutUs">
+                    <li class="nav-list-item" id=""><a>公司简介</a></li>
+                </router-link> -->
+            </ul>
+            <ul class="navbar-nav nav-button-group navbar-right">
+                <li class="nav-list-item">
+                    <button class="download-btn btn-animation follow-Public-number"><span>免费领取资料</span></button>
+                </li>
+                <!-- icp临时取消 -->
+                <!-- <li class="nav-list-item">
+                    <button class="download-btn btn-animation follow-Small-program"><span>PTE交流群</span></button>
+                </li> -->
+                <li class="nav-list-item J-register-btn">
+                    <a>
+                        <button class="signin-btn btn-animation btn-an-adverse" @click="loginWebSite()"><span>注册</span></button>
+                    </a>
+                </li>
+                <li class="nav-list-item J-login-btn">
+                    <a>
+                        <button class="signin-btn btn-animation btn-an-adverse " @click="loginWebSite()"><span>登录</span></button>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+
+<!-- 扫描二维码 -->
+<div class="erweima-download-modal-wrapper erweima-J-down-load-app" style="display: none;">
+    <div class="erweima-download-modal-bg"></div>
+    <div class="erweima-download-modal">
+        <div class="download-modal-header">
+            <div class="erweima-modal-close"></div>
+        </div>
+        <div class="download-modal-body">
+            <div class="download-title">扫描二维码 下载APP</div>
+            <div class="download-sub-title"></div>
+            <img class="download-code" src="../static/images/offical_weichat_1a0871c.jpg">
+        </div>
+    </div>
+</div>
+
+   <!-- //登陆弹出框 -->
+<div class="login-download-modal-wrapper login-J-down-load-app" id="login_box">
+    <div class="login-download-modal-bg" @click="closeRequest()"></div>
+    <div class="login-download-modal login-grid">
+      <img class="grid-top-pic" src="../static/images/loginBoxTop.png" style="max-width: 100%">
+      <div class="top-word">
+        <p class="brand-intro-font">PTE黑科技在线学习平台</p>
+        <p class="brand-edition-font">Ver 1.15.0版本</p>
+      </div>
+      <div class="login-content">
+        <img class="erweima" src="../static/images/load.gif" />
+        <div style="font-size:14px;color:red;max-width:60%" v-if="isShowLoginState">{{ loginState }}</div>
+        <p class="login-font-style">请使用微信扫描二维码登录</p>
+        <p class="login-font-style">“PTE黑科技”</p>
+        <button class="solve" v-if="isShowSolveBtn" @click="solveExtent">已解决？点击刷新</button>
+      </div>
+    </div>
+</div>
+
+
+    <section class="banner case-banner J-scorll-top">
+        <h5 class="banner-title">圈子</h5>
+        <p class="banner-slogan">圈子很小，口碑很重要</p>
+    </section>
+<div class="J-new-media" style="display: block;">
+    <section class="container case-section pain-points" style="margin:100px auto">
+        <div class="pain-points-header">
+            考过PTE很重要，可是臣妾做不到
+        </div>
+        <div class="pain-points-body">
+            <ul class="pain-list clearfix">
+                <li class="pain-item-wrap">
+                    <div class="pain-item">
+                        以前大学英语4级-6级水平，多年没学英语 ，如今年龄偏大，为了移民，备考很匆忙~(>_<)~
+                        <div class="pain-logo yy-situation-1"></div>
+                    </div>
+                </li>
+                <li class="pain-item-wrap">
+                    <div class="pain-item">
+                        从没考过pte，但是生活中一直都有接触英语，底子比较好，大学英语6级水平，不知道怎么才能一次性就通过考试(ಥ﹏ಥ)
+                        <div class="pain-logo yy-situation-2"></div>
+                    </div>
+                </li>
+                <li class="pain-item-wrap">
+                    <div class="pain-item">
+                        考过pte，已成功通过考试，但是想冲击更高的分数，一直不得要领ヽ(#`Д´)ﾉ
+                        <br>
+                        <br>
+                        <div class="pain-logo yy-situation-3"></div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="bdp-solution clearfix">
+        <div class="container case-section" style="margin:100px auto">
+            <div class="bdp-solution-header">
+                在黑科技PTE，关于考试的一切将变得简单
+            </div>
+            <div class="bdp-solution-body">
+                <ul class="solution-list clearfix">
+                    <li class="solution-item-wrap_4">
+                        <div class="solution-item">
+                            <i class="ico-solution yy-value-1"></i>
+                            <p class="solution-title">
+                                操作简单，易上手
+                            </p>
+                            <p class="solution-intro">
+                                刚接触pte考生，不懂规则没关系，在黑科技答题练习就好了~
+                            </p>
+                        </div>
+                    </li>
+                    <li class="solution-item-wrap_4">
+                        <div class="solution-item">
+                            <i class="ico-solution yy-value-2"></i>
+                            <p class="solution-title">
+                                自动生成分析报表
+                            </p>
+                            <p class="solution-intro">
+                                运用当下最具突破性技术，一键生成自己当前学习情况~
+                            </p>
+                        </div>
+                    </li>
+                    <li class="solution-item-wrap_4">
+                        <div class="solution-item">
+                            <i class="ico-solution yy-value-3"></i>
+                            <p class="solution-title">
+                                学习计划预测预警
+                            </p>
+                            <p class="solution-intro">
+                                针对考生学习能力的短板，进行专项技能提升~
+                            </p>
+                        </div>
+                    </li>
+                    <li class="solution-item-wrap_4">
+                        <div class="solution-item">
+                            <i class="ico-solution yy-value-4"></i>
+                            <p class="solution-title">
+                                微信数据实时同步
+                            </p>
+                            <p class="solution-intro">
+                                一键链接微信小程序，数据统一实时更新~
+                            </p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="real-example clearfix">
+        <div class="container case-section" style="margin:100px auto">
+            <div class="real-example-header">
+                真实的考生案例
+            </div>
+            <div class="real-example-body">
+                <ul class="example-list clearfix">
+                    <li class="example-item-wrap">
+                        <div class="example-item">
+                            <div class="example-user-info">
+                                <div class="logo-study yy-touxiang1"></div>
+                                <div class="name">
+                                    秋鹿鸣
+                                </div>
+                                <div class="company">
+                                    PTE黑科技押题班 & 听力集训班
+                                </div>
+                            </div>
+                            <div style="line-height: 28px; font-size: 20px;  color: rgba(10,18,32,.87); ">
+                                这才是上班族备考本来的样子！！！
+                            </div>
+                            <div class="example-question">
+                                <span class="label">经验分享:</span>
+                                我是一名上班狗，之前都是下班回家后每晚读2个小时，周末多花一些时间；这次索性和老板请了两周假，复习一周考一次 ；在这里建议上班族们可以试试，衡量一下 pte分数对你的重要性，然后把全部精力放在复习备考上，在短期内保持状态去冲刺几次考试，一定比拉长战线效果来得好虽然每个人上课的吸收程度不一样，但是还是非常推荐黑科技Marie老师的听力课（突破听力瓶颈），以及押题班(黑科技的押题鸡精，采用大数据，尤其在写作方面，为我备考节省了很多时间，让我得以专心攻克听力难题）一开始上手pte的时候我花了大量的时间练习RA，保证每个单词发音的正确（有些单词的发音是错误的，如果没有去及时纠正，然后错误的东西练习100遍也还是错的，平时背单词的时候多积累，多动手查词典）。元音饱满，辅音清晰，以及动名词结尾形态变化也确保能读出来；我都是直接对着微信文件传输助手练的。
+                            </div>
+                            <div class="learn-more">
+                                <a class="btn-learn-more" href="https://mp.weixin.qq.com/s/jYZImVxS5t6llNrPLMBylg" target="_blank">了解TA的故事</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="example-item-wrap">
+                        <div class="example-item">
+                            <div class="example-user-info">
+                                <div class="logo-study yy-touxiang2"></div>
+                                <div class="name">
+                                    Peter
+                                </div>
+                                <div class="company">
+                                    PTE黑科技押题班
+                                </div>
+                            </div>
+                            <div  style="line-height: 28px; font-size: 20px;  color: rgba(10,18,32,.87); ">
+                                终于过了！等这一刻已经很久了...
+                            </div>
+                            <div class="example-question">
+                                <span class="label">经验分享：</span>
+                                喔！喔！！喔！！！
+                                我从2017年8月第一次接触PTE，当时在读研究生准备毕业移民，我的学长学姐们基本都是60分直接拿PR。我一边忙着搞毕业设计，一边准备NAATI(现在的CCL)。我心里想的是，大家60分都能PR了，如果我有了65分（NATTI的5分加PTE 7炸的10分），肯定秒下PR。我1月份的时候拿到了NATTI的5分，开始认真复习PTE，指南针的中介还告诉我说，你们这个是冷门专业，65分肯定可以移民了。我是一个有着严重英语厌学情绪的人，而且属于单词背完就忘，周围的朋友又都是中国人。我拿着我的PTE的成绩单开始绝望，61分到65分都很难，更别说炸八了一次偶然的机会，朋友推荐我看机经，说考试很多题都是重复的，我就打听到了黑科技，当时还没有小程序，大班长会耐心的把题目整理成PDF，免费发给大家。
+                                <br>
+                                <br>
+                                <br>
+                            </div>
+                            <div class="learn-more">
+                                <a class="btn-learn-more" href="https://w.url.cn/s/AGwFeeB" target="_blank">了解TA的故事</a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+</div>
+
+
+
+<footer>
+    <div class="container">
+        <!-- <div class="row">
+            <img src="/static/../static/images/new_home/footer_logo.png" class="logo footer-logo">
+        </div> -->
+        <div class="row">
+            <div class="col-md-8">
+                <ul class="footer-nav-container">
+                    <router-link to="/">
+                        <li><a class="container-intro">首页</a><i class="disc"></i></li>
+                    </router-link>
+                    <router-link to="/CaseOperate">
+                        <li><a class="container-intro">课程&会员</a><i class="disc"></i></li>
+                    </router-link>
+                    <router-link to="/Member">
+                        <li><a class="container-intro">用户案例</a><i class="disc"></i></li>
+                    </router-link>
+                    <!-- icp临时取消 -->
+                    <!-- <router-link to="/InstructionalVideo">
+                        <li><a class="container-intro">教学视频</a><i class="disc"></i></li>
+                    </router-link>
+                    <router-link to="/Portal">
+                        <li><a class="container-intro">用户社区</a><i class="disc"></i></li>
+                    </router-link> -->
+                    <router-link to="/AboutUs">
+                        <li class="container-intro">公司简介<i class="disc"></i></li>
+                    </router-link>
+                    <li id="showPCall">联系我们</li>
+                </ul>
+                <ul class="contact-container footer-mesg">
+                    <li><i class="ico ico-address"></i>深圳市南山区南山街道南海大道西桂庙路北阳光华艺大厦1栋4F、4G-20</li>
+                    <li><a href="https://www.zhihu.com/org/ptehei-ke-ji/posts"><i class="ico ico-zhihu"></i>黑科技PTE</a></li>
+                    <li><i class="ico ico-phone"></i>400-101-9155</li>
+                    <li><a id="email_contact" href="mailto:info@ikk.ai"><i class="ico ico-email"></i>info@ikk.ai</a></li>
+                    <!-- <li><i class="ico ico-qq"></i>2543360559</li> -->
+                </ul>
+                <p class="copyright">收款人邮箱：948674232@qq.com，zhaot90@gmail.com</p>
+                <p class="copyright">Copyright 2017 - 2018 粤ICP备18023850号 ikk. All Rights Reserved.<span>深圳市科科智能科技有限公司 版权所有</span></p>
+            </div>
+            <div class="col-md-2 footer-code">
+                <p class="code-name">PTE微信公众号</p>
+                <img src="../static/images/unified-baidu-statistics.jpg" width="100px">
+                <p class="code-info">更多PTE热门资讯</p>
+            </div>
+            <div class="col-md-2 footer-code">
+                <p class="code-name">PTE小程序</p>
+                <img src="../static/images/offical_weichat_1a0871c.jpg" width="100px">
+                <p class="code-info">扫TA随时开始学习</p>
+            </div>
+            <div class="col-md-2 footer-code">
+                <p class="code-name">客服二维码</p>
+                <img src="../static/images/unified-baidu-statistics.jpg" width="100px">
+                <p class="code-info">咨询更多问题</p>
+            </div>
+        </div>
+    </div>
+</footer>
+  </div>
+    <!-- 写一个不可被关闭的弹窗让用户去访问正式网站 -->
+    <v-dialog
+      v-model="isIntoFormalWebsite"
+      width="500"
+    >
+      <v-card>
+        <v-card-title
+          class="headline grey lighten-2"
+          primary-title
+        >
+          您没有访问该网站的权限
+        </v-card-title>
+
+        <v-card-text>
+          <div style="font-size:16px;">
+              <p>请访问PTE黑科技正式网站</p><span class="pr-2">国内用户:</span><a style="color:#0CA3F4" href="https://pte-ai.com" target="_blank">https://pte-ai</a></br><span class="pr-2">澳洲用户:</span><a style="color:#0CA3F4" href="https://pte.ai" target="_blank">https://pte.ai</a>
+          </div>
+        </v-card-text>
+
+        <v-divider></v-divider>
+
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn
+            color="primary"
+            flat
+            @click="isIntoFormalWebsite = false"
+          >
+            继续游览
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+  </div>
+</template>
+<script>
+var isShowLoginBox = false;
+import AV from 'leancloud-storage'
+  import {
+    LoginVerify
+  } from '@/api/user'
+import '../../assets/js/public.js'
+import { initUserData } from '@/util/initUserData.js'
+
+  /* eslint-disable */
+  export default {
+    data () {
+      return {
+          isIntoFormalWebsite: false,  //用户没有stg权限时的弹窗
+          dialogContent:{
+            content:'该网址是PTE黑科技平台的测试网站，可能会存在一些bug，您确定继续使用吗?(点击取消即可进入正式练习网站)'
+            },
+          isLiveStgWebsite:false,  //用户是否在stg分支上
+          isShowLoginState:false,
+          loginState:'',
+          isShowSolveBtn:false
+      }
+    },
+    created(){
+        let path =  window.location.href;
+        if( path.indexOf('localhost') == -1){
+            if( path.indexOf('stg') != -1){
+                // 用户当前在 stg分支上
+                this.isLiveStgWebsite = true;
+            }else{
+                // 当用户不在 stg 上时，直接检查用户是否符合自己所在国家访问的网址 如果不正确 直接跳转
+                this.checkCity()
+            }
+        }
+    },
+    methods:{
+        checkCity(){
+            // 两个开关  flag检测是否是国内的链接。请求接口后 咱判断 是国内还是 国外，两层判断实现 当前用户是否符合自己所在国家所访问的链接
+            let href = window.location.host;
+             $.ajax({
+                type:'GET',
+                url:'https://ipapi.co/json/',
+                async:true,
+                success:function(res){
+                    if(res.country_name == 'China' && res.country == 'CN'){
+                        if( href.indexOf('pte-ai') == -1 ){
+                            // window.location.href = 'https://pte-ai.com';
+                            this.isIntoFormalWebsite = true;
+                        }
+                    }else{   // 国外
+                        if(href.indexOf('pte.ai') == -1){   //跳转到国内的链接  pte-ai
+                            // window.location.href = 'https://pte.ai';
+                            this.isIntoFormalWebsite = true;
+                        }
+                    }
+                }
+                ,error:function(err){
+                    console.log('请求失败');
+                }
+            })
+        },
+        closeRequest(){
+            isShowLoginBox = false;
+            $('#login_box.login-J-down-load-app').hide();
+        },
+        loginWebSite(){
+            let that = this;
+            this.isShowSolveBtn = false;
+            this.isShowLoginState = false;
+            isShowLoginBox = true;
+            $('#login_box.login-J-down-load-app').show();
+            AV.User.logOut();
+            this.$store.dispatch('logOut')
+            //加载数据
+            $.ajax({
+                type:'GET',
+                url:"https://stg-pteppp.leanapp.cn/weblogin/getqr/",
+                data:{},
+                async:true,
+                success:function(res){
+                    $('.login-download-modal-wrapper .login-content .erweima').attr('src',res.qr);
+                    that.obtainLoginState(res.session);
+                },
+                error:function(error){
+                    console.log(error);
+                }
+            })
+        },
+        obtainLoginState(id){
+            var timer = null;
+            clearTimeout(timer);
+            let that = this;
+            $.ajax({
+                type:"Get",
+                url:"https://stg-pteppp.leanapp.cn/weblogin/update/"+id+"",
+                data:{},
+                async:true,
+                success:function(res){
+                    let state = res.state;
+                    console.log(state);
+                    if(state ==='normal'){
+                        if(isShowLoginBox){
+                            timer = setTimeout(() => {
+                            that.obtainLoginState(id);
+                            },1000);
+                        }
+                    }else if(state ==='scan'){
+                        if(isShowLoginBox){
+                            timer = setTimeout(() => {
+                            that.obtainLoginState(id);
+                            },1000);
+                        }
+                        $('.login-download-modal-wrapper .login-content .erweima').attr('src','../static/images/load.gif');
+                        that.loginState = '已扫码';
+                        that.isShowLoginState = true;
+                    }else if(state == 'auth'){
+                        that.loginState = '正在登录';
+                        that.userLogin(res)
+                    }else if(state == 'invalid'){
+                        that.loginState = '已失效';
+                    }
+                },
+                error:function(){
+                    that.loginState = '登录失败，请重试';
+                    that.isShowLoginState = true;
+                }
+            })
+        },
+        solveExtent(){
+            this.loginWebSite();
+        },
+        async LoginVerifyData () {
+            try {
+                return await LoginVerify()
+            } catch (err) {
+                // this.WarnError(err);
+                console.log(err)
+                return Promise.reject(err)
+            }
+
+        },
+        loginEvent(){
+            // 在路径跳转之前 先检查用户 是否在stg分支 以及 是否有stg的权限
+            if(this.isLiveStgWebsite){
+                //检测用户是否 有stg的权限： 用户信息中 有envs:array key值，并且里面存在 staging 值
+                if(window.userJSON.envs && window.userJSON.envs.includes("staging")){
+                    initUserData()
+                    // 有权限
+                    this.$router.push({ path: '/index' })
+                }else{
+                    // 当没有权限时，直接弹出一个不可被关闭的窗口，让用户去访问正式网站
+                    this.closeRequest();
+                    this.isIntoFormalWebsite = true;
+                }
+                // 在stg时，需要检测用户是否有stg的权限
+            }else{
+                    initUserData()
+                // 不在  stg分支上 直接进入网站
+                this.$router.push({ path: '/index' })
+            }
+        },
+        onSession(res){
+            if(res && res.auth.session){
+                console.log('进入session');
+                return AV.User.become(res.auth.session)
+            }else{
+                return AV.User.loginWithAuthData(Object.assign({},{session:res.auth.code}), 'lc_weapp', { failOnNotExist: true })
+            }
+        },
+        userLogin(res){
+            let that = this;
+            try {
+                let auth = res.auth
+                this.onSession(res)
+                // AV.User.loginWithAuthData(res.auth, 'lc_weapp', {
+                //     failOnNotExist: true
+                // })
+                .then(user => {
+                    // window.userJSON = JSON.parse(JSON.stringify(user))
+                    window.userJSON = user.toJSON();
+                    // commit to vuex
+                    this.$store.dispatch('user_login', window.userJSON)
+                    return this.LoginVerifyData()
+                })
+                .then(() =>{
+                    this.loginEvent()
+                })
+                .catch(err => {
+                    this.WarnError(err);
+                })
+            } catch (error) {
+                this.WarnError(error);
+            }
+        },
+        WarnError(Error){
+            let obj = JSON.parse(JSON.stringify(Error));
+            let str = obj.rawMessage || obj.error;
+            this.loginState = str;
+            this.isShowSolveBtn = true;
+            $('.login-download-modal-wrapper .login-content .erweima').attr('src','../static/images/unified-baidu-statistics.jpg');
+        }
+    }
+  }
+</script>
+
+<style>
+  @import "../../less/Landing/auto_combine_73112_320ecc7.less";
+  @import "../../less/Landing/auto_combine_e9548_3e22ea4.less";
+  @import "../../less/Landing/common.less";
+  .container-intro{
+      color: #fff !important;
+  }
+    .solve{
+         padding: 0 20px;
+         height:40px;
+         margin-top:10px;
+         border-radius:4px;
+         color:#fff;
+         font-size:16px;
+         box-shadow:0 0 5px #00b3fe;
+         background:#1bd1fc;
+         letter-spacing:1px;
+         &:hover{
+            box-shadow:0 0 10px #00b3fe;
+         }
+    }
+</style>
