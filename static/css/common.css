@@ -1003,7 +1003,6 @@ position: relative;
 .zhichi-position-grid{
   position: fixed;
   z-index: 99999999;
-  left: 0;
   right: 0;
   top: calc("50vh - 120px");
   top: 0;
@@ -1027,6 +1026,9 @@ position: relative;
 }
 .zhichi-position-grid .zhichi-content-gird .server-side-btn:nth-child(2){
   border-bottom: 1px solid rgba(255, 255, 255, .2);
+}
+.zhichi-position-grid .zhichi-content-gird .server-side-btn button{
+  
 }
 .zhichi-position-grid .zhichi-content-gird .server-side-btn{
   width: 100%;

@@ -3,42 +3,42 @@ var isShowLoginBox = false;
 var zhichi_str = `  <div class="zhichi-position-grid">
 <div class="zhichi-content-gird">
   <div class="server-side-btn">
-    <img src="/static/images/login_page/zhichi-phone.svg" alt="电话" />
+    <img src="./static/images/zhichi-phone.svg" alt="电话" />
     <button class="zhi-pte-phone">电话沟通</button>
     <div class="zhichi-side-container">
       热线：400-101-9155
     </div>
   </div>
   <div class="server-side-btn zhiCustomBtn">
-    <img src="/static/images/login_page/zhichi-message.svg" alt="信息" />
+    <img src="./static/images/zhichi-message.svg" alt="信息" />
     <button class="zhichi-pte-server">在线咨询</button>
     <div class="zhichi-side-container zhiCustomBtn">
       联系大班长
     </div>
   </div>
   <div class="server-side-btn">
-    <img src="/static/images/login_page/zhichi-data.svg" alt="电话" />
+    <img src="./static/images/zhichi-data.svg" alt="电话" />
     <button id="btn">免费资料</button>
     <div class="zhichi-side-container">
       <p style="text-align: center;padding-bottom: 10px;">扫二维码领取资料</p>
-      <img src="/static/images/login_page/unified-baidu-statistics.jpg" />
+      <img src="./static/images/unified-baidu-statistics.jpg" />
     </div>
   </div>
   <!-- <div class="server-side-btn">
-    <img src="/static/images/login_page/zhichi-TV.svg" alt="tryListen" />
+    <img src="./static/images/zhichi-TV.svg" alt="tryListen" />
     <button>申请试听</button>
   </div> -->
 </div>
 </div>`;
 
-var isMobile = window.navigator.userAgent.indexOf("Mobile") >= 0;
 
-if (!isMobile) {
-  $('body').append(`` + zhichi_str + ``);
-}
 
 $(function () {
-
+  var isMobile = window.navigator.userAgent.indexOf("Mobile") >= 0;
+  if (!isMobile) {
+    console.log(isMobile);
+    $('body').append(`` + zhichi_str + ``);
+  }
   layui.use(['carousel', 'form'], function(){
     var carousel = layui.carousel
 
@@ -55,10 +55,8 @@ $(function () {
 
   })
 
-
   $('.loginWebSite').click(function(){
     console.log('dsadasd');
-    
     loginWebSite()
   })
 
@@ -123,14 +121,14 @@ $(function () {
   //点击关注公众号
   $('#app').on('click', '.follow-Public-number', function () {
     $('.erweima-download-modal-wrapper .download-title').html('<p>扫描二维码添加pte大班长微信</p> <p>立即免费领取pte全套备考资料</p>');
-    $('.erweima-download-modal-wrapper .download-code').attr('src', '/static/images/login_page/unified-baidu-statistics.jpg');
+    $('.erweima-download-modal-wrapper .download-code').attr('src', './static/images/unified-baidu-statistics.jpg');
     $('.erweima-J-down-load-app').show();
   });
 
   //点击关注小程序
   $('#app').on('click', '.follow-Small-program', function () {
     $('.erweima-download-modal-wrapper .download-title').html('<p>扫描二维码添加pte大班长微信</p> <p>回复“加群”立即加入pte备考交流群</p>');
-    $('.erweima-download-modal-wrapper .download-code').attr('src', '/static/images/login_page/unified-baidu-statistics.jpg');
+    $('.erweima-download-modal-wrapper .download-code').attr('src', './static/images/unified-baidu-statistics.jpg');
     $('.erweima-J-down-load-app').show();
   });
 
@@ -145,7 +143,7 @@ $(function () {
   //点击联系我们
   $('#app').on('click', '#showPCall', function () {
     $('.erweima-download-modal-wrapper .download-title').html('关注大班长微信号，获取更多新鲜资讯');
-    $('.erweima-download-modal-wrapper .download-code').attr('src', '/static/images/login_page/pteblacktech5.png');
+    $('.erweima-download-modal-wrapper .download-code').attr('src', './static/images/pteblacktech5.png');
     $('.erweima-J-down-load-app').show();
   });
 
@@ -274,7 +272,7 @@ function obtainLoginState(id){
                   that.obtainLoginState(id);
                   },1000);
               }
-              $('.login-download-modal-wrapper .login-content .erweima').attr('src','/static/images/login_page/load.gif');
+              $('.login-download-modal-wrapper .login-content .erweima').attr('src','./static/images/load.gif');
               that.loginState = '已扫码';
               that.isShowLoginState = true;
           }else if(state == 'auth'){
